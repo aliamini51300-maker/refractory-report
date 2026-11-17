@@ -1,0 +1,621 @@
+html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1e3a5f">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="گزارش پخت">
+<title>گزارش پخت آجر نسوز</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Tahoma, 'Segoe UI', sans-serif;
+    background: #f0f2f5;
+    color: #1a1a2e;
+    padding: 16px;
+    font-size: 12px;
+    padding-top: max(16px, env(safe-area-inset-top));
+  }
+  .container { max-width: 1200px; margin: 0 auto; }
+  header {
+    background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  header h1 { font-size: 16px; }
+  header .company { font-size: 11px; opacity: 0.85; margin-top: 2px; }
+  .toolbar { display: flex; gap: 6px; flex-wrap: wrap; }
+  button {
+    font-family: inherit;
+    padding: 7px 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .btn-primary { background: #2d5a87; color: white; }
+  .btn-primary:hover { background: #1e3a5f; }
+  .btn-print { background: #f59e0b; color: white; }
+  .btn-danger { background: #ef4444; color: white; }
+  .btn-success { background: #10b981; color: white; }
+
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e3a5f;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title::before {
+    content: '';
+    width: 4px; height: 14px;
+    background: #2d5a87;
+    border-radius: 2px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 8px;
+  }
+  .field label {
+    display: block;
+    font-size: 10px;
+    color: #6b7280;
+    margin-bottom: 3px;
+    font-weight: 600;
+  }
+  .field input, .field select {
+    width: 100%;
+    padding: 8px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 14px;
+    background: #fafbfc;
+  }
+  .field input:focus { outline: none; border-color: #2d5a87; background: white; }
+
+  .sample-counter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: #f3f4f6;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #1e3a5f;
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+  .sample-counter button {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    font-size: 20px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #2d5a87;
+    color: white;
+  }
+  .sample-counter button:disabled { background: #cbd5e1; cursor: not-allowed; }
+  .sample-counter .count { font-size: 18px; min-width: 30px; text-align: center; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+  }
+  th, td {
+    border: 1px solid #e5e7eb;
+    padding: 4px 6px;
+    text-align: center;
+  }
+  th {
+    background: #f3f4f6;
+    font-weight: 700;
+    color: #374151;
+    font-size: 10px;
+  }
+  td.row-label {
+    background: #f9fafb;
+    font-weight: 700;
+    text-align: right;
+    padding-right: 8px;
+    font-size: 10px;
+  }
+  td.sample-label {
+    background: #2d5a87;
+    color: white;
+    font-weight: 700;
+    width: 50px;
+    vertical-align: middle;
+  }
+  td.standard { background: #eff6ff; color: #1e40af; font-weight: 600; }
+  td.before { background: #fef3c7; }
+  td.after { background: #d1fae5; }
+  td.shrink { background: #fee2e2; color: #991b1b; font-weight: 700; }
+  td.calc-result { background: #e0e7ff; color: #1e3a5f; font-weight: 700; }
+  table input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    text-align: center;
+    font-family: inherit;
+    font-size: 13px;
+    padding: 4px;
+    font-weight: 600;
+  }
+  table input:focus {
+    outline: 2px solid #2d5a87;
+    border-radius: 4px;
+    background: white;
+  }
+
+  .phys-section { margin-top: 10px; padding-top: 10px; border-top: 1.5px dashed #cbd5e1; }
+  .phys-section:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+  .phys-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #2d5a87;
+    margin-bottom: 6px;
+    background: #eff6ff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  .signature-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .signature-box {
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+  }
+  .signature-box label {
+    display: block;
+    font-size: 10px;
+    color: #6b7280;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .signature-box input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #2d5a87;
+    padding: 6px;
+    text-align: center;
+    font-family: inherit;
+    font-size: 13px;
+    background: transparent;
+  }
+  textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    min-height: 50px;
+    resize: vertical;
+    background: #fafbfc;
+  }
+  textarea:focus { outline: none; border-color: #2d5a87; background: white; }
+
+  .install-banner {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .install-banner.hidden { display: none; }
+  .install-banner button {
+    background: white;
+    color: #059669;
+    padding: 8px 18px;
+    font-weight: 700;
+  }
+
+  @media print {
+    body { background: white; padding: 0; font-size: 8px; }
+    .no-print { display: none !important; }
+    .container { max-width: 100%; }
+    header { background: #1e3a5f !important; padding: 6px 10px; margin-bottom: 4px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    header h1 { font-size: 11px; }
+    header .company { font-size: 8px; }
+    .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; margin-bottom: 3px; padding: 5px; border-radius: 0; }
+    .card-title { font-size: 9px; margin-bottom: 4px; padding-bottom: 2px; border-bottom-width: 1px; }
+    .form-grid { gap: 3px; }
+    .field label { font-size: 7px; margin-bottom: 1px; }
+    .field input { padding: 2px 4px; font-size: 8px; border: 1px solid #999; border-radius: 0; }
+    th, td { border: 1px solid #999 !important; font-size: 7px; padding: 1px 2px; }
+    th { background: #e5e7eb !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 7px; }
+    td.sample-label { background: #2d5a87 !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    td.standard, td.before, td.after, td.shrink, td.calc-result { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    td.row-label { font-size: 7px; }
+    input, textarea { border: none !important; background: transparent !important; padding: 0 !important; font-size: 8px !important; }
+    textarea { min-height: 20px; }
+    .signature-section { gap: 8px; margin-top: 6px; }
+    .signature-box { padding: 4px; }
+    .signature-box label { font-size: 7px; }
+    .signature-box input { font-size: 8px; border-bottom: 1px solid #666; }
+    .sample-counter, .install-banner { display: none !important; }
+    .phys-title { font-size: 8px; padding: 2px 4px; }
+    @page { size: A4 landscape; margin: 6mm; }
+  }
+  @page { size: A4 landscape; margin: 8mm; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="install-banner no-print hidden" id="installBanner">
+    <span>📱 نرم‌افزار رو نصب کن!</span>
+    <button onclick="installApp()">نصب کن</button>
+  </div>
+
+  <header>
+    <div>
+      <h1>🔥 گزارش اختلاف ابعاد قبل و بعد از پخت</h1>
+      <div class="company">دیرگداز مهر آریان فارس — سروستان ۲</div>
+    </div>
+    <div class="toolbar no-print">
+      <button class="btn-primary" onclick="saveData()">💾 ذخیره</button>
+      <button class="btn-print" onclick="window.print()">🖨️ چاپ A4</button>
+      <button class="btn-success" onclick="exportJSON()">📤 خروجی</button>
+      <button class="btn-danger" onclick="resetForm()">🗑️ پاک کردن</button>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="card-title">اطلاعات پخت</div>
+    <div class="form-grid">
+      <div class="field"><label>شماره پخت</label><input type="text" id="batchNo"></div>
+      <div class="field"><label>دمای پخت (°C)</label><input type="number" id="temp"></div>
+      <div class="field"><label>تاریخ شروع</label><input type="text" id="dateStart"></div>
+      <div class="field"><label>تاریخ اتمام</label><input type="text" id="dateEnd"></div>
+      <div class="field"><label>کیفیت محصول</label><input type="text" id="quality"></div>
+      <div class="field"><label>نوع قالب</label><input type="text" id="moldType"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">نمونه‌ها</div>
+
+    <div class="sample-counter no-print">
+      <span>تعداد نمونه:</span>
+      <button onclick="changeSamples(-1)" id="btnMinus">−</button>
+      <span class="count" id="sampleCount">2</span>
+      <button onclick="changeSamples(1)" id="btnPlus">+</button>
+      <span style="margin-right:auto; font-size:10px; color:#6b7280; font-weight:400;">حداکثر ۱۰ نمونه</span>
+    </div>
+
+    <table style="margin-bottom:8px;">
+      <thead>
+        <tr>
+          <th style="width:50px;">استاندارد</th>
+          <th>طول</th><th>عرض</th><th>ارتفاع جلو</th><th>ارتفاع عقب</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="row-label" style="text-align:center; background:#eff6ff; color:#1e40af;">مشترک</td>
+          <td class="standard"><input type="number" id="stdLen" value="230" step="0.1"></td>
+          <td class="standard"><input type="number" id="stdWid" value="114" step="0.1"></td>
+          <td class="standard"><input type="number" id="stdHF" value="76" step="0.1"></td>
+          <td class="standard"><input type="number" id="stdHB" value="76" step="0.1"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div id="samplesContainer"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">خواص فیزیکی</div>
+    <div id="physContainer"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">توضیحات و امضاها</div>
+    <div class="field" style="margin-bottom:10px">
+      <label>توضیحات</label>
+      <textarea id="notes" placeholder="آجر تولید شده با ضایعات دریچه کشویی پخت شده در کوره دوار ..."></textarea>
+    </div>
+    <div class="signature-section">
+      <div class="signature-box">
+        <label>نام و امضا بازرس کنترل کیفیت</label>
+        <input type="text" id="inspectorName">
+      </div>
+      <div class="signature-box">
+        <label>نام و امضا مدیر کنترل کیفیت</label>
+        <input type="text" id="managerName">
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const MAX_SAMPLES = 10;
+let sampleCount = 2;
+let savedValues = {};
+let deferredPrompt = null;
+
+function num(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
+function fmt(n, d=2) { if (n === null || n === undefined || isNaN(n)) return '—'; return n.toFixed(d); }
+
+function density(weight, len, wid, hf, hb) {
+  if (!weight || !len || !wid || !hf || !hb) return null;
+  const avgH = (hf + hb) / 2;
+  return (weight / (avgH * wid * len)) * 1000;
+}
+
+function collectValues() {
+  document.querySelectorAll('input, textarea').forEach(el => {
+    if (el.id) savedValues[el.id] = el.value;
+  });
+}
+function restoreValues() {
+  document.querySelectorAll('input, textarea').forEach(el => {
+    if (el.id && savedValues[el.id] !== undefined) el.value = savedValues[el.id];
+  });
+}
+
+function renderSamples() {
+  collectValues();
+  const container = document.getElementById('samplesContainer');
+  let html = '<table><thead><tr>' +
+    '<th style="width:50px;">نمونه</th><th style="width:70px;">وضعیت</th>' +
+    '<th>طول</th><th>عرض</th><th>ارتفاع جلو</th><th>ارتفاع عقب</th><th>وزن (g)</th><th>دانسیته</th>' +
+    '</tr></thead><tbody>';
+
+  for (let i = 1; i <= sampleCount; i++) {
+    html += `
+      <tr>
+        <td class="sample-label" rowspan="4">${i}</td>
+        <td class="row-label">قبل پخت</td>
+        <td class="before"><input type="number" id="s${i}_befLen" step="0.1" oninput="calcSample(${i})"></td>
+        <td class="before"><input type="number" id="s${i}_befWid" step="0.1" oninput="calcSample(${i})"></td>
+        <td class="before"><input type="number" id="s${i}_befHF" step="0.1" oninput="calcSample(${i})"></td>
+        <td class="before"><input type="number" id="s${i}_befHB" step="0.1" oninput="calcSample(${i})"></td>
+        <td class="before"><input type="number" id="s${i}_befW" step="0.1" oninput="calcSample(${i})"></td>
+        <td class="calc-result" id="s${i}_befDens">—</td>
+      </tr>
+      <tr>
+        <td class="row-label">بعد پخت</td>
+        <td class="after"><input type="number" id="s${i}_aftLen" step="0.1" oninput="calcSample(${i})"></td>
+        <td class="after"><input type="number" id="s${i}_aftWid" step="0.1" oninput="calcSample(${i})"></td>
+        <td class="after"><input type="number" id="s${i}_aftHF" step="0.1" oninput="calcSample(${i})"></td>
+        <td class="after"><input type="number" id="s${i}_aftHB" step="0.1" oninput="calcSample(${i})"></td>
+        <td class="after"><input type="number" id="s${i}_aftW" step="0.1" oninput="calcSample(${i})"></td>
+        <td class="calc-result" id="s${i}_aftDens">—</td>
+      </tr>
+      <tr>
+        <td class="row-label">شرینکیج %</td>
+        <td class="shrink" id="s${i}_shrLen">—</td>
+        <td class="shrink" id="s${i}_shrWid">—</td>
+        <td class="shrink" id="s${i}_shrHF">—</td>
+        <td class="shrink" id="s${i}_shrHB">—</td>
+        <td class="shrink" id="s${i}_shrW">—</td>
+        <td class="shrink" id="s${i}_shrDens">—</td>
+      </tr>
+      <tr style="height:4px;"><td colspan="8" style="padding:0; border:none; background:#f9fafb;"></td></tr>
+    `;
+  }
+  html += '</tbody></table>';
+  container.innerHTML = html;
+  restoreValues();
+  for (let i = 1; i <= sampleCount; i++) calcSample(i);
+}
+
+function renderPhys() {
+  collectValues();
+  const container = document.getElementById('physContainer');
+  let html = '';
+  for (let i = 1; i <= sampleCount; i++) {
+    html += `
+      <div class="phys-section">
+        <div class="phys-title">نمونه ${i}</div>
+        <table>
+          <thead>
+            <tr><th>W1</th><th>W2</th><th>W3</th><th>AP(%)</th><th>WA(%)</th><th>ASG</th><th>BD</th><th>CCS</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="number" id="p${i}_W1" step="0.1" oninput="calcPhys(${i})"></td>
+              <td><input type="number" id="p${i}_W2" step="0.1" oninput="calcPhys(${i})"></td>
+              <td><input type="number" id="p${i}_W3" step="0.1" oninput="calcPhys(${i})"></td>
+              <td class="calc-result" id="p${i}_AP">—</td>
+              <td class="calc-result" id="p${i}_WA">—</td>
+              <td class="calc-result" id="p${i}_ASG">—</td>
+              <td class="calc-result" id="p${i}_BD">—</td>
+              <td><input type="number" id="p${i}_CCS" step="0.1"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+  restoreValues();
+  for (let i = 1; i <= sampleCount; i++) calcPhys(i);
+}
+
+function calcSample(i) {
+  const g = id => num(document.getElementById(`s${i}_${id}`)?.value);
+  const befLen=g('befLen'), befWid=g('befWid'), befHF=g('befHF'), befHB=g('befHB'), befW=g('befW');
+  const aftLen=g('aftLen'), aftWid=g('aftWid'), aftHF=g('aftHF'), aftHB=g('aftHB'), aftW=g('aftW');
+  const befDens = density(befW, befLen, befWid, befHF, befHB);
+  const aftDens = density(aftW, aftLen, aftWid, aftHF, aftHB);
+  const set = (id, v) => { const el = document.getElementById(`s${i}_${id}`); if (el) el.textContent = v; };
+  set('befDens', fmt(befDens));
+  set('aftDens', fmt(aftDens));
+  const sh = (a, b) => { if (!a || !b) return '—'; return fmt(((a - b) / a) * 100, 2) + '%'; };
+  set('shrLen', sh(befLen, aftLen));
+  set('shrWid', sh(befWid, aftWid));
+  set('shrHF', sh(befHF, aftHF));
+  set('shrHB', sh(befHB, aftHB));
+  set('shrW', sh(befW, aftW));
+  set('shrDens', sh(befDens, aftDens));
+}
+
+function calcPhys(i) {
+  const g = id => num(document.getElementById(`p${i}_${id}`)?.value);
+  const W1=g('W1'), W2=g('W2'), W3=g('W3');
+  const AP  = (W1 && W2 && W3 && (W3 - W2) !== 0) ? ((W3 - W1) / (W3 - W2)) * 100 : null;
+  const WA  = (W1 && W3) ? ((W3 - W1) / W1) * 125 : null;
+  const ASG = (W1 && W2 && (W1 - W2) !== 0) ? (W1 / (W1 - W2)) * 0.8 : null;
+  const BD  = (W3 && W2 && (W3 - W2) !== 0) ? (W3 / (W3 - W2)) * 0.8 : null;
+  const set = (id, v) => { const el = document.getElementById(`p${i}_${id}`); if (el) el.textContent = v; };
+  set('AP', fmt(AP)); set('WA', fmt(WA)); set('ASG', fmt(ASG, 3)); set('BD', fmt(BD, 3));
+}
+
+function changeSamples(delta) {
+  const newCount = Math.max(1, Math.min(MAX_SAMPLES, sampleCount + delta));
+  if (newCount === sampleCount) return;
+  collectValues();
+  sampleCount = newCount;
+  document.getElementById('sampleCount').textContent = sampleCount;
+  document.getElementById('btnMinus').disabled = sampleCount <= 1;
+  document.getElementById('btnPlus').disabled = sampleCount >= MAX_SAMPLES;
+  renderSamples();
+  renderPhys();
+}
+
+const STORAGE_KEY = 'refractory_v2';
+
+function collectAll() {
+  const data = { sampleCount };
+  document.querySelectorAll('input, textarea').forEach(el => { if (el.id) data[el.id] = el.value; });
+  return data;
+}
+
+function saveData() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(collectAll()));
+    alert('✅ گزارش با موفقیت ذخیره شد.');
+  } catch(e) { alert('خطا: ' + e.message); }
+}
+
+function loadData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    if (data.sampleCount) sampleCount = data.sampleCount;
+    Object.keys(data).forEach(id => {
+      const el = document.getElementById(id);
+      if (el && id !== 'sampleCount') el.value = data[id];
+    });
+  } catch(e) {}
+}
+
+function resetForm() {
+  if (!confirm('همه اطلاعات پاک شوند؟')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  savedValues = {};
+  sampleCount = 2;
+  document.getElementById('sampleCount').textContent = sampleCount;
+  document.getElementById('btnMinus').disabled = false;
+  document.getElementById('btnPlus').disabled = false;
+  document.getElementById('stdLen').value = 230;
+  document.getElementById('stdWid').value = 114;
+  document.getElementById('stdHF').value = 76;
+  document.getElementById('stdHB').value = 76;
+  renderSamples();
+  renderPhys();
+}
+
+function exportJSON() {
+  const data = collectAll();
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'گزارش-پخت-' + (data.batchNo || 'بدون-شماره') + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(choice => {
+      if (choice.outcome === 'accepted') {
+        document.getElementById('installBanner').classList.add('hidden');
+      }
+      deferredPrompt = null;
+    });
+  }
+}
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  document.getElementById('installBanner').classList.remove('hidden');
+});
+
+window.addEventListener('appinstalled', () => {
+  document.getElementById('installBanner').classList.add('hidden');
+});
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').then(() => {
+      console.log('SW registered');
+    }).catch(err => console.log('SW failed:', err));
+  });
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  loadData();
+  document.getElementById('sampleCount').textContent = sampleCount;
+  document.getElementById('btnMinus').disabled = sampleCount <= 1;
+  document.getElementById('btnPlus').disabled = sampleCount >= MAX_SAMPLES;
+  renderSamples();
+  renderPhys();
+});
+</script>
+</body>
+</html>
