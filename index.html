@@ -197,62 +197,62 @@ html
   textarea { width: 100%; padding: 8px; border: 1.5px solid #e5e7eb; border-radius: 6px; font-family: inherit; font-size: 14px; min-height: 60px; resize: vertical; background: #fafbfc; transition: all 0.2s; }
   textarea:focus { outline: none; border-color: #2d5a87; background: white; transform: scale(1.02); z-index: 10; }
 
-  /* ===== PRINT LAYOUT (فرم چاپی شبیه اکسل) ===== */
+  /* ===== PRINT LAYOUT (فرم چاپی تک‌صفحه‌ای A4 افقی) ===== */
   @media print {
-    body { background: white; padding: 0; font-size: 9px; }
-    .no-print { display: none !important; }
-    .container { max-width: 100%; }
-    header { background: #1e3a5f !important; padding: 6px 12px; margin-bottom: 6px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    header h1 { font-size: 12px; }
+    body { background: white; padding: 0; font-size: 7px; }
+    .no-print, .tab-btn, .sample-counter, .badge, button { display: none !important; }
+    .container { max-width: 100%; margin: 0; }
+    header { background: #1e3a5f !important; padding: 3px 8px; margin-bottom: 2px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    header h1 { font-size: 9px; margin-bottom: 0; }
+    header .company { font-size: 6px; }
+    
+    /* چیدمان کارت‌ها در یک ردیف */
     .tab-content { display: block !important; }
+    .card { box-shadow: none; border: none; padding: 0; margin-bottom: 2px; }
+    .card-title { font-size: 7px; margin-bottom: 2px; padding-bottom: 1px; border-bottom: 1px solid #333; }
     
-    /* مخفی کردن دکمه‌ها و فرم‌های ورودی در چاپ */
-    .tab-btn, .sample-counter, .badge, .no-print, button { display: none !important; }
-    
-    /* کارت‌ها در چاپ به هم بچسبند */
-    .card { box-shadow: none; border: 1px solid #333; margin-bottom: 4px; padding: 4px; border-radius: 0; }
-    .card-title { font-size: 9px; margin-bottom: 4px; padding-bottom: 2px; border-bottom: 1px solid #333; }
-    
-    /* تبدیل کارت‌ها به جدول در چاپ */
+    /* کارت‌های نمونه در چاپ */
+    #samplesContainer, #physContainer, #ccsContainer { display: flex; flex-wrap: wrap; gap: 2px; }
     .sample-card, .phys-card, .ccs-card {
+      flex: 1 1 30%; /* سه کارت در هر ردیف */
       border: 1px solid #333;
       border-radius: 0;
-      padding: 4px;
-      margin-bottom: 4px;
+      padding: 2px;
+      margin-bottom: 0;
       background: white;
+      min-width: 0;
     }
-    .sample-card h4, .phys-card h4, .ccs-card h4 { display: none; }
+    .sample-card h4, .phys-card h4, .ccs-card h4 { font-size: 6px; margin: 1px 0; padding: 0; border-bottom: none; }
     
-    .row-group, .phys-row, .ccs-row { display: inline-block; width: 100%; margin-bottom: 2px; }
-    .row-group .field, .phys-row .field, .ccs-row .field { display: inline-block; width: 24%; margin-left: 1%; }
-    .row-group .field label, .phys-row .field label, .ccs-row .field label { display: inline; font-size: 7px; margin-left: 2px; }
-    .row-group .field input, .phys-row .field input, .ccs-row .field input { 
-      display: inline; width: 50%; border: none !important; border-bottom: 1px solid #666 !important; 
-      background: transparent !important; font-size: 8px !important; padding: 0 !important; 
-      transform: none !important; box-shadow: none !important; text-align: center;
-    }
+    .row-group { display: block; margin-bottom: 0; }
+    .row-group .field { display: inline-block; width: 48%; margin-left: 1%; }
+    .row-group .field label { display: inline; font-size: 5px; margin-left: 1px; }
+    .row-group .field input { display: inline; width: 50%; border: none !important; border-bottom: 1px solid #666 !important; background: transparent !important; font-size: 6px !important; padding: 0 !important; transform: none !important; box-shadow: none !important; text-align: center; }
     
-    .result-group, .phys-result, .ccs-result { display: inline-block; width: 100%; margin-top: 2px; padding-top: 2px; border-top: 1px dashed #999; }
-    .result-box { display: inline-block; width: 24%; background: transparent !important; padding: 0; text-align: center; }
-    .result-box .label { font-size: 6px; display: inline; }
-    .result-box .value { font-size: 7px; display: inline; font-weight: bold; }
-    .result-box.shrink { background: transparent !important; }
+    .phys-row, .ccs-row { display: block; }
+    .phys-row .field, .ccs-row .field { display: inline-block; width: 31%; margin-left: 1%; }
+    .phys-row .field label, .ccs-row .field label { display: inline; font-size: 5px; margin-left: 1px; }
+    .phys-row .field input, .ccs-row .field input { display: inline; width: 50%; border: none !important; border-bottom: 1px solid #666 !important; background: transparent !important; font-size: 6px !important; padding: 0 !important; transform: none !important; box-shadow: none !important; text-align: center; }
     
+    .result-group, .phys-result, .ccs-result { display: inline-block; width: 100%; margin-top: 1px; padding-top: 1px; border-top: 1px dashed #999; }
+    .result-box { display: inline-block; width: 23%; background: transparent !important; padding: 0; text-align: center; }
+    .result-box .label { font-size: 5px; display: inline; }
+    .result-box .value { font-size: 6px; display: inline; font-weight: bold; }
+
     .form-grid { display: block; }
     .form-grid .field { display: inline-block; width: 30%; margin-left: 2%; }
-    .form-grid .field label { display: inline; font-size: 7px; }
-    .form-grid .field input { display: inline; width: 60%; border: none !important; border-bottom: 1px solid #666 !important; background: transparent !important; font-size: 8px !important; transform: none !important; }
+    .form-grid .field label { display: inline; font-size: 6px; }
+    .form-grid .field input { display: inline; width: 50%; border: none !important; border-bottom: 1px solid #666 !important; background: transparent !important; font-size: 7px !important; transform: none !important; }
 
-    .signature-section { display: flex; justify-content: space-between; margin-top: 10px; }
+    .signature-section { display: flex; justify-content: space-between; margin-top: 4px; }
     .signature-box { width: 45%; border: none; padding: 0; }
-    .signature-box label { font-size: 7px; }
-    .signature-box input { font-size: 8px; border-bottom: 1px solid #333; }
+    .signature-box label { font-size: 6px; }
+    .signature-box input { font-size: 7px; border-bottom: 1px solid #333; }
     
-    textarea { border: none !important; background: transparent !important; font-size: 8px !important; min-height: 15px; transform: none !important; }
-    
-    @page { size: A4 landscape; margin: 5mm; }
+    textarea { border: none !important; background: transparent !important; font-size: 7px !important; min-height: 10px; transform: none !important; }
+    @page { size: A4 landscape; margin: 3mm; }
   }
-  @page { size: A4 landscape; margin: 5mm; }
+  @page { size: A4 landscape; margin: 3mm; }
 </style>
 </head>
 <body>
@@ -342,7 +342,154 @@ html
     </div>
   </div>
 </div>
-javascript
+
+<script>
+const MAX_SAMPLES = 10;
+let sampleCount = 2;
+let savedValues = {};
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function num(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
+function fmt(n, d=2) { if (n === null || n === undefined || isNaN(n)) return '—'; return n.toFixed(d); }
+
+function density(weight, len, wid, hf, hb) {
+  if (!weight || !len || !wid || !hf || !hb) return null;
+  const avgH = (hf + hb) / 2;
+  return (weight / (avgH * wid * len)) * 1000;
+}
+
+function collectValues() {
+  document.querySelectorAll('input, textarea').forEach(el => {
+    if (el.id) savedValues[el.id] = el.value;
+  });
+}
+function restoreValues() {
+  document.querySelectorAll('input, textarea').forEach(el => {
+    if (el.id && savedValues[el.id] !== undefined) el.value = savedValues[el.id];
+  });
+}
+
+function renderSamples() {
+  collectValues();
+  const container = document.getElementById('samplesContainer');
+  let html = '';
+  for (let i = 1; i <= sampleCount; i++) {
+    html += `
+      <div class="sample-card">
+        <div class="badge">نمونه ${i}</div>
+        <h4>قبل پخت</h4>
+        <div class="row-group">
+          <div class="field"><label>طول</label><input type="number" id="s${i}_befLen" step="0.1" oninput="calcSample(${i})"></div>
+          <div class="field"><label>عرض</label><input type="number" id="s${i}_befWid" step="0.1" oninput="calcSample(${i})"></div>
+        </div>
+        <div class="row-group">
+          <div class="field"><label>ارتفاع جلو</label><input type="number" id="s${i}_befHF" step="0.1" oninput="calcSample(${i})"></div>
+          <div class="field"><label>ارتفاع عقب</label><input type="number" id="s${i}_befHB" step="0.1" oninput="calcSample(${i})"></div>
+        </div>
+        <div class="field" style="margin-bottom:4px;"><label>وزن (g)</label><input type="number" id="s${i}_befW" step="0.1" oninput="calcSample(${i})"></div>
+
+        <h4>بعد پخت</h4>
+        <div class="row-group">
+          <div class="field"><label>طول</label><input type="number" id="s${i}_aftLen" step="0.1" oninput="calcSample(${i})"></div>
+          <div class="field"><label>عرض</label><input type="number" id="s${i}_aftWid" step="0.1" oninput="calcSample(${i})"></div>
+        </div>
+        <div class="row-group">
+          <div class="field"><label>ارتفاع جلو</label><input type="number" id="s${i}_aftHF" step="0.1" oninput="calcSample(${i})"></div>
+          <div class="field"><label>ارتفاع عقب</label><input type="number" id="s${i}_aftHB" step="0.1" oninput="calcSample(${i})"></div>
+        </div>
+        <div class="field" style="margin-bottom:4px;"><label>وزن (g)</label><input type="number" id="s${i}_aftW" step="0.1" oninput="calcSample(${i})"></div>
+
+        <div class="result-group">
+          <div class="result-box"><div class="label">دانسیته قبل</div><div class="value" id="s${i}_befDens">—</div></div>
+          <div class="result-box"><div class="label">دانسیته بعد</div><div class="value" id="s${i}_aftDens">—</div></div>
+        </div>
+        <div class="result-group" style="border-top:none; margin-top:4px; padding-top:0;">
+          <div class="result-box shrink"><div class="label">شرینکیج طول</div><div class="value" id="s${i}_shrLen">—</div></div>
+          <div class="result-box shrink"><div class="label">شرینکیج عرض</div><div class="value" id="s${i}_shrWid">—</div></div>
+        </div>
+        <div class="result-group" style="border-top:none; margin-top:4px; padding-top:0;">
+          <div class="result-box shrink"><div class="label">شرینکیج ارتفاع جلو</div><div class="value" id="s${i}_shrHF">—</div></div>
+          <div class="result-box shrink"><div class="label">شرینکیج ارتفاع عقب</div><div class="value" id="s${i}_shrHB">—</div></div>
+        </div>
+        <div class="result-group" style="border-top:none; margin-top:4px; padding-top:0;">
+          <div class="result-box shrink"><div class="label">شرینکیج وزن</div><div class="value" id="s${i}_shrW">—</div></div>
+          <div class="result-box shrink"><div class="label">شرینکیج دانسیته</div><div class="value" id="s${i}_shrDens">—</div></div>
+        </div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+  restoreValues();
+  for (let i = 1; i <= sampleCount; i++) calcSample(i);
+}
+
+function renderPhys() {
+  collectValues();
+  const container = document.getElementById('physContainer');
+  let html = '';
+  for (let i = 1; i <= sampleCount; i++) {
+    const isTop = (i % 2 === 1);
+    const rowLabel = isTop ? 'سر' : 'ته';
+    html += `
+      <div class="phys-card">
+        <div class="badge">نمونه ${i} (${rowLabel})</div>
+        <h4>مشخصات نمونه</h4>
+        <div class="row-group">
+          <div class="field"><label>قالب محصول</label><input type="text" id="p${i}_mold" placeholder="B320 A"></div>
+          <div class="field"><label>کیفیت</label><input type="text" id="p${i}_quality" placeholder="SPINEL"></div>
+        </div>
+        <h4>وزن‌ها (گرم)</h4>
+        <div class="phys-row">
+          <div class="field"><label>W1</label><input type="number" id="p${i}_W1" step="0.1" oninput="calcPhys(${i})"></div>
+          <div class="field"><label>W2</label><input type="number" id="p${i}_W2" step="0.1" oninput="calcPhys(${i})"></div>
+          <div class="field"><label>W3</label><input type="number" id="p${i}_W3" step="0.1" oninput="calcPhys(${i})"></div>
+        </div>
+        <div class="phys-result">
+          <div class="result-box"><div class="label">AP(%)</div><div class="value" id="p${i}_AP">—</div></div>
+          <div class="result-box"><div class="label">WA(%)</div><div class="value" id="p${i}_WA">—</div></div>
+          <div class="result-box"><div class="label">ASG</div><div class="value" id="p${i}_ASG">—</div></div>
+          <div class="result-box"><div class="label">BD</div><div class="value" id="p${i}_BD">—</div></div>
+        </div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+  restoreValues();
+  for (let i = 1; i <= sampleCount; i++) calcPhys(i);
+}
+
+function renderCCS() {
+  collectValues();
+  const container = document.getElementById('ccsContainer');
+  let html = '';
+  for (let i = 1; i <= sampleCount; i++) {
+    const isTop = (i % 2 === 1);
+    const rowLabel = isTop ? 'سر' : 'ته';
+    html += `
+      <div class="ccs-card">
+        <div class="badge">نمونه ${i} (${rowLabel})</div>
+        <h4>مشخصات نمونه</h4>
+        <div class="row-group">
+          <div class="field"><label>نوع مواد</label><input type="text" id="c${i}_material" placeholder="SPINEL"></div>
+          <div class="field"><label>قالب محصول</label><input type="text" id="c${i}_mold" placeholder="B320 A"></div>
+        </div>
+        <h4>ابعاد و بار</h4>
+        <div class="ccs-row">
+          <div class="field"><label>طول (cm)</label><input type="number" id="c${i}_len" step="0.1" oninput="calcCCS(${i})"></div>
+          <div class="field"><label>عرض (cm)</label><input type="number" id="c${i}_wid" step="0.1" oninput="calcCCS(${i})"></div>
+          <div class="field"><label>بار (Kg)</label><input type="number" id="c${i}_load" step="1" oninput="calcCCS(${i})"></div>
+        </div>
+        <div class="ccs-result">
+          <div class="result-box"><div class="label">CCS (Kg/Cm2)</div><div class="value" id="c${i}_ccs">—</div></div>
+        </div>
+      </div>
+   html
 <script>
 const MAX_SAMPLES = 10;
 let sampleCount = 2;
@@ -632,3 +779,24 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+🛠️ فایل sw.js (نسخه v16)
+این فایل را هم تغییر بده تا کش جدید اعمال شود:
+
+javascript
+const CACHE_NAME = 'refractory-v16';
+
+self.addEventListener('install', (e) => {
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', (e) => {
+  e.respondWith(
+    caches.match(e.request).then((response) => {
+      return response || fetch(e.request);
+    })
+  );
+});
