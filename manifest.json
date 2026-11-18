@@ -3,7 +3,8 @@ json
   "name": "گزارش پخت آجر نسوز",
   "short_name": "گزارش پخت",
   "description": "گزارش اختلاف ابعاد قبل و بعد از پخت - دیرگداز مهر آریان فارس",
-  "start_url": "./index.html",
+  "start_url": "/refractory-report/index.html",
+  "scope": "/refractory-report/",
   "display": "standalone",
   "orientation": "any",
   "background_color": "#f0f2f5",
@@ -12,16 +13,16 @@ json
   "dir": "rtl",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "/refractory-report/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "icon-512.png",
+      "src": "/refractory-report/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ]
 }
