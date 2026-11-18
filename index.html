@@ -523,7 +523,7 @@ function changeSamples(delta) {
   renderPhys();
 }
 
-const STORAGE_KEY = 'refractory_v2';
+const STORAGE_KEY = 'refractory_v5';
 
 function collectAll() {
   const data = { sampleCount };
@@ -533,9 +533,12 @@ function collectAll() {
 
 function saveData() {
   try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(collectAll()));
-    alert('✅ گزارش با موفقیت ذخیره شد.');
-  } catch(e) { alert('خطا: ' + e.message); }
+    const data = collectAll();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    alert('✅ اطلاعات با موفقیت ذخیره شد!');
+  } catch(e) {
+    alert('❌ خطا در ذخیره‌سازی: ' + e.message);
+  }
 }
 
 function loadData() {
@@ -552,7 +555,7 @@ function loadData() {
 }
 
 function resetForm() {
-  if (!confirm('همه اطلاعات پاک شوند؟')) return;
+  if (!confirm('آیا مطمئن هستید؟ همه اطلاعات پاک می‌شوند.')) return;
   localStorage.removeItem(STORAGE_KEY);
   savedValues = {};
   sampleCount = 2;
@@ -565,6 +568,7 @@ function resetForm() {
   document.getElementById('stdHB').value = 76;
   renderSamples();
   renderPhys();
+  alert('🗑️ همه اطلاعات پاک شد!');
 }
 
 function exportJSON() {
