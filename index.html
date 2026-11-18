@@ -15,36 +15,36 @@ html
     font-family: Tahoma, 'Segoe UI', sans-serif;
     background: #f0f2f5;
     color: #1a1a2e;
-    padding: 12px;
-    font-size: 13px;
-    padding-top: max(12px, env(safe-area-inset-top));
+    padding: 10px;
+    font-size: 12px;
+    padding-top: max(10px, env(safe-area-inset-top));
   }
   .container { max-width: 1200px; margin: 0 auto; }
   
   header {
     background: linear-gradient(135deg, #1e3a5f, #2d5a87);
     color: white;
-    padding: 14px 16px;
-    border-radius: 12px;
+    padding: 12px 16px;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
   }
-  header h1 { font-size: 15px; margin-bottom: 4px; }
-  header .company { font-size: 11px; opacity: 0.85; }
-  .toolbar { display: flex; gap: 6px; flex-wrap: wrap; }
+  header h1 { font-size: 14px; margin-bottom: 2px; }
+  header .company { font-size: 10px; opacity: 0.85; }
+  .toolbar { display: flex; gap: 4px; flex-wrap: wrap; }
   
   button {
     font-family: inherit;
-    padding: 8px 12px;
+    padding: 6px 10px;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     transition: all 0.2s;
   }
@@ -55,26 +55,25 @@ html
   
   .tabs {
     display: flex;
-    gap: 6px;
-    margin-bottom: 12px;
+    gap: 4px;
+    margin-bottom: 10px;
     border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 6px;
+    padding-bottom: 4px;
     overflow-x: auto;
   }
   .tab-btn {
     background: transparent;
     color: #6b7280;
-    padding: 8px 14px;
-    border-radius: 8px 8px 0 0;
-    font-size: 13px;
-    border-bottom: 3px solid transparent;
+    padding: 6px 12px;
+    border-radius: 6px 6px 0 0;
+    font-size: 12px;
+    border-bottom: 2px solid transparent;
     white-space: nowrap;
   }
   .tab-btn.active {
     background: white;
     color: #1e3a5f;
     border-bottom-color: #2d5a87;
-    box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
     font-weight: 700;
   }
   .tab-content { display: none; }
@@ -82,49 +81,48 @@ html
 
   .card {
     background: white;
-    border-radius: 10px;
-    padding: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    overflow: visible; /* اسکرول افقی حذف شد تا جدول کامل باشه */
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
   }
   .card-title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: #1e3a5f;
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid #e5e7eb;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #e5e7eb;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
   .card-title::before {
     content: '';
-    width: 4px; height: 14px;
+    width: 3px; height: 12px;
     background: #2d5a87;
-    border-radius: 2px;
+    border-radius: 1px;
   }
 
   .form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 6px;
   }
   .field label {
     display: block;
-    font-size: 10px;
+    font-size: 9px;
     color: #6b7280;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
     font-weight: 700;
   }
   .field input, .field select {
     width: 100%;
-    padding: 8px;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
+    padding: 6px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 14px;
     background: #fafbfc;
     font-weight: 600;
     color: #1e3a5f;
@@ -136,26 +134,26 @@ html
     background: white; 
     transform: scale(1.05);
     z-index: 10;
-    box-shadow: 0 4px 12px rgba(45,90,135,0.15);
+    box-shadow: 0 2px 8px rgba(45,90,135,0.15);
   }
 
   .sample-counter {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
+    gap: 8px;
+    padding: 6px 10px;
     background: #f3f4f6;
-    border-radius: 10px;
-    margin-bottom: 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
     font-weight: 700;
     color: #1e3a5f;
-    font-size: 13px;
+    font-size: 11px;
     flex-wrap: wrap;
   }
   .sample-counter button {
-    width: 32px; height: 32px;
+    width: 28px; height: 28px;
     border-radius: 50%;
-    font-size: 18px;
+    font-size: 16px;
     padding: 0;
     display: flex;
     align-items: center;
@@ -164,32 +162,34 @@ html
     color: white;
   }
   .sample-counter button:disabled { background: #cbd5e1; cursor: not-allowed; }
-  .sample-counter .count { font-size: 16px; min-width: 24px; text-align: center; }
+  .sample-counter .count { font-size: 14px; min-width: 20px; text-align: center; }
 
-  /* جدول‌ها: کاملاً ۱۰۰٪ عرض صفحه */
+  /* جدول‌ها: ۱۰۰٪ عرض صفحه، بدون اسکرول */
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 12px;
-    margin-top: 8px;
+    font-size: 11px;
+    margin-top: 6px;
+    table-layout: fixed; /* برای جا شدن کامل در صفحه */
   }
   th, td {
     border: 1px solid #d1d5db;
     padding: 4px 2px;
     text-align: center;
+    word-wrap: break-word;
   }
   th {
     background: #f3f4f6;
     font-weight: 700;
     color: #374151;
-    font-size: 10px;
+    font-size: 9px;
   }
   td.row-label {
     background: #f9fafb;
     font-weight: 700;
     text-align: right;
     padding-right: 4px;
-    font-size: 10px;
+    font-size: 9px;
     white-space: nowrap;
   }
   td.sample-label {
@@ -198,7 +198,7 @@ html
     font-weight: 700;
     width: 30px;
     vertical-align: middle;
-    font-size: 12px;
+    font-size: 11px;
   }
   td.standard { background: #eff6ff; color: #1e40af; font-weight: 700; }
   td.before { background: #fef3c7; }
@@ -209,16 +209,15 @@ html
   /* کادرهای ورودی جدول با انیمیشن زوم */
   table input {
     width: 100%;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     background: transparent;
     text-align: center;
     font-family: inherit;
-    font-size: 14px;
-    padding: 4px 0;
+    font-size: 13px;
+    padding: 3px 0;
     font-weight: 700;
     color: #1e3a5f;
-    border-radius: 4px;
-    min-width: 40px; /* کوچک‌تر شد تا همه در صفحه جا بشن */
+    border-radius: 3px;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
@@ -226,40 +225,40 @@ html
     outline: none;
     border-color: #2d5a87;
     background: white;
-    transform: scale(1.25); /* زوم واضح‌تر */
+    transform: scale(1.3); /* زوم واضح‌تر */
     z-index: 20;
     box-shadow: 0 4px 15px rgba(45,90,135,0.3);
     position: relative;
   }
 
-  .phys-section { margin-top: 12px; padding-top: 12px; border-top: 1.5px dashed #cbd5e1; }
+  .phys-section { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #cbd5e1; }
   .phys-section:first-child { border-top: none; padding-top: 0; margin-top: 0; }
   .phys-title {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     color: #2d5a87;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     background: #eff6ff;
-    padding: 4px 8px;
-    border-radius: 6px;
+    padding: 3px 6px;
+    border-radius: 4px;
     display: inline-block;
   }
 
   .signature-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-top: 12px;
+    gap: 10px;
+    margin-top: 10px;
   }
   .signature-box {
-    border: 2px dashed #cbd5e1;
-    border-radius: 8px;
-    padding: 10px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 6px;
+    padding: 8px;
     text-align: center;
   }
   .signature-box label {
     display: block;
-    font-size: 10px;
+    font-size: 9px;
     color: #6b7280;
     margin-bottom: 4px;
     font-weight: 700;
@@ -267,11 +266,11 @@ html
   .signature-box input {
     width: 100%;
     border: none;
-    border-bottom: 2px solid #2d5a87;
-    padding: 6px;
+    border-bottom: 1px solid #2d5a87;
+    padding: 4px;
     text-align: center;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 13px;
     background: transparent;
     font-weight: 600;
     transition: all 0.2s;
@@ -284,12 +283,12 @@ html
   
   textarea {
     width: 100%;
-    padding: 8px;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
+    padding: 6px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
     font-family: inherit;
-    font-size: 14px;
-    min-height: 60px;
+    font-size: 13px;
+    min-height: 50px;
     resize: vertical;
     background: #fafbfc;
     transition: all 0.2s;
@@ -306,34 +305,34 @@ html
     body { background: white; padding: 0; font-size: 8px; }
     .no-print { display: none !important; }
     .container { max-width: 100%; }
-    header { background: #1e3a5f !important; padding: 6px 10px; margin-bottom: 4px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    header h1 { font-size: 11px; }
-    header .company { font-size: 8px; }
+    header { background: #1e3a5f !important; padding: 4px 8px; margin-bottom: 4px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    header h1 { font-size: 10px; }
+    header .company { font-size: 7px; }
     .tab-content { display: block !important; page-break-after: always; }
     .tab-content:last-child { page-break-after: avoid; }
-    .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; margin-bottom: 8px; padding: 5px; border-radius: 0; overflow: visible; }
-    .card-title { font-size: 9px; margin-bottom: 4px; padding-bottom: 2px; border-bottom-width: 1px; }
-    .form-grid { gap: 3px; }
-    .field label { font-size: 7px; margin-bottom: 1px; }
-    .field input { padding: 2px 4px; font-size: 8px; border: 1px solid #999; border-radius: 0; transform: none !important; }
-    th, td { border: 1px solid #999 !important; font-size: 7px; padding: 1px 2px; }
-    th { background: #e5e7eb !important; font-size: 7px; }
+    .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; margin-bottom: 6px; padding: 4px; border-radius: 0; }
+    .card-title { font-size: 8px; margin-bottom: 3px; padding-bottom: 1px; border-bottom-width: 1px; }
+    .form-grid { gap: 2px; }
+    .field label { font-size: 6px; margin-bottom: 1px; }
+    .field input { padding: 1px 2px; font-size: 7px; border: 1px solid #999; border-radius: 0; transform: none !important; }
+    th, td { border: 1px solid #999 !important; font-size: 6px; padding: 1px; }
+    th { background: #e5e7eb !important; font-size: 6px; }
     td.sample-label { background: #2d5a87 !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     td.standard, td.before, td.after, td.shrink, td.calc-result { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    td.row-label { font-size: 7px; }
-    input, textarea { border: none !important; background: transparent !important; padding: 0 !important; font-size: 8px !important; transform: none !important; }
-    textarea { min-height: 20px; }
-    .signature-section { gap: 8px; margin-top: 6px; }
-    .signature-box { padding: 4px; }
-    .signature-box label { font-size: 7px; }
-    .signature-box input { font-size: 8px; border-bottom: 1px solid #666; }
+    td.row-label { font-size: 6px; }
+    input, textarea { border: none !important; background: transparent !important; padding: 0 !important; font-size: 7px !important; transform: none !important; }
+    textarea { min-height: 15px; }
+    .signature-section { gap: 6px; margin-top: 4px; }
+    .signature-box { padding: 2px; }
+    .signature-box label { font-size: 6px; }
+    .signature-box input { font-size: 7px; border-bottom: 1px solid #666; }
     .sample-counter { display: none !important; }
-    .phys-title { font-size: 8px; padding: 2px 4px; }
+    .phys-title { font-size: 7px; padding: 1px 3px; }
     .tabs { display: none !important; }
     table { min-width: 100%; }
-    @page { size: A4 landscape; margin: 6mm; }
+    @page { size: A4 landscape; margin: 4mm; }
   }
-  @page { size: A4 landscape; margin: 8mm; }
+  @page { size: A4 landscape; margin: 6mm; }
 </style>
 </head>
 <body>
@@ -380,10 +379,10 @@ html
         <button onclick="changeSamples(1)" id="btnPlus">+</button>
       </div>
 
-      <table style="margin-bottom:12px;">
+      <table style="margin-bottom:10px;">
         <thead>
           <tr>
-            <th style="width:50px;">استاندارد</th>
+            <th style="width:45px;">استاندارد</th>
             <th>طول</th><th>عرض</th><th>ارتفاع جلو</th><th>ارتفاع عقب</th>
           </tr>
         </thead>
@@ -412,7 +411,7 @@ html
   <div id="tab-print" class="tab-content">
     <div class="card">
       <div class="card-title">توضیحات و امضاها</div>
-      <div class="field" style="margin-bottom:12px">
+      <div class="field" style="margin-bottom:10px">
         <label>توضیحات</label>
         <textarea id="notes" placeholder="آجر تولید شده با ضایعات دریچه کشویی پخت شده در کوره دوار ..."></textarea>
       </div>
@@ -467,7 +466,7 @@ function renderSamples() {
   collectValues();
   const container = document.getElementById('samplesContainer');
   let html = '<table><thead><tr>' +
-    '<th style="width:40px;">نمونه</th><th style="width:60px;">وضعیت</th>' +
+    '<th style="width:35px;">نمونه</th><th style="width:50px;">وضعیت</th>' +
     '<th>طول</th><th>عرض</th><th>ارتفاع جلو</th><th>ارتفاع عقب</th><th>وزن (g)</th><th>دانسیته</th>' +
     '</tr></thead><tbody>';
 
@@ -501,7 +500,7 @@ function renderSamples() {
         <td class="shrink" id="s${i}_shrW">—</td>
         <td class="shrink" id="s${i}_shrDens">—</td>
       </tr>
-      <tr style="height:4px;"><td colspan="8" style="padding:0; border:none; background:#f9fafb;"></td></tr>
+      <tr style="height:3px;"><td colspan="8" style="padding:0; border:none; background:#f9fafb;"></td></tr>
     `;
   }
   html += '</tbody></table>';
