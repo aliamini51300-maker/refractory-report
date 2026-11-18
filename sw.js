@@ -1,5 +1,5 @@
 javascript
-const CACHE_NAME = 'refractory-v5';
+const CACHE_NAME = 'refractory-v6';
 const ASSETS = [
   './',
   './index.html',
