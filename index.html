@@ -16,35 +16,36 @@ html
     background: #f0f2f5;
     color: #1a1a2e;
     padding: 10px;
-    font-size: 12px;
+    font-size: 13px;
     padding-top: max(10px, env(safe-area-inset-top));
   }
-  .container { max-width: 1200px; margin: 0 auto; }
+  .container { max-width: 700px; margin: 0 auto; }
   
+  /* Header */
   header {
     background: linear-gradient(135deg, #1e3a5f, #2d5a87);
     color: white;
-    padding: 12px 16px;
-    border-radius: 10px;
+    padding: 14px 16px;
+    border-radius: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     flex-wrap: wrap;
     gap: 8px;
   }
-  header h1 { font-size: 14px; margin-bottom: 2px; }
+  header h1 { font-size: 15px; margin-bottom: 2px; }
   header .company { font-size: 10px; opacity: 0.85; }
-  .toolbar { display: flex; gap: 4px; flex-wrap: wrap; }
+  .toolbar { display: flex; gap: 6px; flex-wrap: wrap; }
   
   button {
     font-family: inherit;
-    padding: 6px 10px;
+    padding: 8px 12px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     transition: all 0.2s;
   }
@@ -53,10 +54,11 @@ html
   .btn-danger { background: #ef4444; color: white; }
   .btn-success { background: #10b981; color: white; }
   
+  /* Tabs */
   .tabs {
     display: flex;
     gap: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     border-bottom: 2px solid #e5e7eb;
     padding-bottom: 4px;
     overflow-x: auto;
@@ -64,11 +66,12 @@ html
   .tab-btn {
     background: transparent;
     color: #6b7280;
-    padding: 6px 12px;
-    border-radius: 6px 6px 0 0;
-    font-size: 12px;
-    border-bottom: 2px solid transparent;
+    padding: 8px 14px;
+    border-radius: 8px 8px 0 0;
+    font-size: 13px;
+    border-bottom: 3px solid transparent;
     white-space: nowrap;
+    font-weight: 600;
   }
   .tab-btn.active {
     background: white;
@@ -79,50 +82,52 @@ html
   .tab-content { display: none; }
   .tab-content.active { display: block; }
 
+  /* Cards */
   .card {
     background: white;
-    border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
   }
   .card-title {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     color: #1e3a5f;
-    margin-bottom: 8px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e5e7eb;
     display: flex;
     align-items: center;
     gap: 6px;
   }
   .card-title::before {
     content: '';
-    width: 3px; height: 12px;
+    width: 4px; height: 14px;
     background: #2d5a87;
-    border-radius: 1px;
+    border-radius: 2px;
   }
 
+  /* Form Grid for top info */
   .form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    gap: 6px;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
   }
   .field label {
     display: block;
-    font-size: 9px;
+    font-size: 10px;
     color: #6b7280;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
     font-weight: 700;
   }
   .field input, .field select {
     width: 100%;
-    padding: 6px;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
+    padding: 8px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 6px;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 15px;
     background: #fafbfc;
     font-weight: 600;
     color: #1e3a5f;
@@ -132,28 +137,90 @@ html
     outline: none; 
     border-color: #2d5a87; 
     background: white; 
-    transform: scale(1.05);
+    transform: scale(1.02);
     z-index: 10;
     box-shadow: 0 2px 8px rgba(45,90,135,0.15);
   }
 
+  /* Sample Cards */
+  .sample-card {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: #fafbfc;
+    position: relative;
+  }
+  .sample-card .badge {
+    position: absolute;
+    top: -10px;
+    right: 12px;
+    background: #2d5a87;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .sample-card h4 {
+    font-size: 12px;
+    color: #374151;
+    margin-bottom: 8px;
+    margin-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed #d1d5db;
+  }
+
+  .row-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+  .row-group .field label {
+    font-size: 9px;
+  }
+  .row-group .field input {
+    padding: 6px;
+    font-size: 14px;
+  }
+
+  .result-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed #cbd5e1;
+  }
+  .result-box {
+    background: #e0e7ff;
+    border-radius: 6px;
+    padding: 6px 8px;
+    text-align: center;
+  }
+  .result-box .label { font-size: 9px; color: #4b5563; font-weight: 700; }
+  .result-box .value { font-size: 15px; font-weight: 800; color: #1e3a5f; }
+  .result-box.shrink { background: #fee2e2; }
+  .result-box.shrink .value { color: #991b1b; }
+
   .sample-counter {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
+    gap: 10px;
+    padding: 8px 12px;
     background: #f3f4f6;
-    border-radius: 6px;
-    margin-bottom: 8px;
+    border-radius: 8px;
+    margin-bottom: 12px;
     font-weight: 700;
     color: #1e3a5f;
-    font-size: 11px;
-    flex-wrap: wrap;
+    font-size: 13px;
+    justify-content: space-between;
   }
   .sample-counter button {
-    width: 28px; height: 28px;
+    width: 32px; height: 32px;
     border-radius: 50%;
-    font-size: 16px;
+    font-size: 18px;
     padding: 0;
     display: flex;
     align-items: center;
@@ -162,85 +229,81 @@ html
     color: white;
   }
   .sample-counter button:disabled { background: #cbd5e1; cursor: not-allowed; }
-  .sample-counter .count { font-size: 14px; min-width: 20px; text-align: center; }
+  .sample-counter .count { font-size: 18px; min-width: 30px; text-align: center; }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 11px;
-    margin-top: 6px;
-    table-layout: fixed; 
-  }
-  th, td {
-    border: 1px solid #d1d5db;
-    padding: 4px 2px;
-    text-align: center;
-    word-wrap: break-word;
-  }
-  th {
-    background: #f3f4f6;
-    font-weight: 700;
-    color: #374151;
-    font-size: 9px;
-  }
-  td.row-label {
-    background: #f9fafb;
-    font-weight: 700;
-    text-align: right;
-    padding-right: 4px;
-    font-size: 9px;
-    white-space: nowrap;
-  }
-  td.sample-label {
-    background: #2d5a87;
-    color: white;
-    font-weight: 700;
-    width: 30px;
-    vertical-align: middle;
-    font-size: 11px;
-  }
-  td.standard { background: #eff6ff; color: #1e40af; font-weight: 700; }
-  td.before { background: #fef3c7; }
-  td.after { background: #d1fae5; }
-  td.shrink { background: #fee2e2; color: #991b1b; font-weight: 700; }
-  td.calc-result { background: #e0e7ff; color: #1e3a5f; font-weight: 700; }
-  
-  table input {
-    width: 100%;
-    border: 1px solid transparent;
-    background: transparent;
-    text-align: center;
-    font-family: inherit;
-    font-size: 13px;
-    padding: 3px 0;
-    font-weight: 700;
-    color: #1e3a5f;
-    border-radius: 3px;
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  table input:focus {
-    outline: none;
-    border-color: #2d5a87;
-    background: white;
-    transform: scale(1.6);
-    z-index: 100;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  /* Phys Cards */
+  .phys-card {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: #fafbfc;
     position: relative;
   }
-
-  .phys-section { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #cbd5e1; }
-  .phys-title {
-    font-size: 10px;
+  .phys-card .badge {
+    position: absolute;
+    top: -10px;
+    right: 12px;
+    background: #2d5a87;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
     font-weight: 700;
-    color: #2d5a87;
-    margin-bottom: 4px;
-    background: #eff6ff;
-    padding: 3px 6px;
-    border-radius: 4px;
-    display: inline-block;
   }
+  .phys-card h4 {
+    font-size: 12px;
+    color: #374151;
+    margin-bottom: 8px;
+    margin-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed #d1d5db;
+  }
+  .phys-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+  .phys-row .field label { font-size: 9px; }
+  .phys-row .field input { padding: 6px; font-size: 14px; }
 
+  .phys-result { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
+  .phys-result .result-box { background: #d1fae5; }
+  .phys-result .result-box .value { color: #065f46; }
+
+  /* CCS Cards */
+  .ccs-card {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+    background: #fafbfc;
+    position: relative;
+  }
+  .ccs-card .badge {
+    position: absolute;
+    top: -10px;
+    right: 12px;
+    background: #2d5a87;
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .ccs-card h4 {
+    font-size: 12px;
+    color: #374151;
+    margin-bottom: 8px;
+    margin-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed #d1d5db;
+  }
+  .ccs-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+  .ccs-row .field label { font-size: 9px; }
+  .ccs-row .field input { padding: 6px; font-size: 14px; }
+
+  .ccs-result { display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 8px; }
+  .ccs-result .result-box { background: #fef3c7; }
+  .ccs-result .result-box .value { color: #92400e; }
+
+  /* Signatures */
   .signature-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -248,14 +311,14 @@ html
     margin-top: 10px;
   }
   .signature-box {
-    border: 1px dashed #cbd5e1;
-    border-radius: 6px;
-    padding: 8px;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 10px;
     text-align: center;
   }
   .signature-box label {
     display: block;
-    font-size: 9px;
+    font-size: 10px;
     color: #6b7280;
     margin-bottom: 4px;
     font-weight: 700;
@@ -263,11 +326,11 @@ html
   .signature-box input {
     width: 100%;
     border: none;
-    border-bottom: 1px solid #2d5a87;
-    padding: 4px;
+    border-bottom: 1.5px solid #2d5a87;
+    padding: 6px;
     text-align: center;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 14px;
     background: transparent;
     font-weight: 600;
     transition: all 0.2s;
@@ -280,12 +343,12 @@ html
   
   textarea {
     width: 100%;
-    padding: 6px;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
+    padding: 8px;
+    border: 1.5px solid #e5e7eb;
+    border-radius: 6px;
     font-family: inherit;
-    font-size: 13px;
-    min-height: 50px;
+    font-size: 14px;
+    min-height: 60px;
     resize: vertical;
     background: #fafbfc;
     transition: all 0.2s;
@@ -298,8 +361,9 @@ html
     z-index: 10;
   }
 
+  /* Print */
   @media print {
-    body { background: white; padding: 0; font-size: 8px; }
+    body { background: white; padding: 0; font-size: 7px; }
     .no-print { display: none !important; }
     .container { max-width: 100%; }
     header { background: #1e3a5f !important; padding: 4px 8px; margin-bottom: 4px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
@@ -307,26 +371,27 @@ html
     header .company { font-size: 7px; }
     .tab-content { display: block !important; page-break-after: always; }
     .tab-content:last-child { page-break-after: avoid; }
-    .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; margin-bottom: 6px; padding: 4px; border-radius: 0; }
-    .card-title { font-size: 8px; margin-bottom: 3px; padding-bottom: 1px; border-bottom-width: 1px; }
+    .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; margin-bottom: 4px; padding: 4px; border-radius: 0; }
+    .card-title { font-size: 7px; margin-bottom: 2px; padding-bottom: 1px; border-bottom-width: 1px; }
     .form-grid { gap: 2px; }
-    .field label { font-size: 6px; margin-bottom: 1px; }
-    .field input { padding: 1px 2px; font-size: 7px; border: 1px solid #999; border-radius: 0; transform: none !important; }
-    th, td { border: 1px solid #999 !important; font-size: 6px; padding: 1px; }
-    th { background: #e5e7eb !important; font-size: 6px; }
-    td.sample-label { background: #2d5a87 !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    td.standard, td.before, td.after, td.shrink, td.calc-result { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    td.row-label { font-size: 6px; }
-    input, textarea { border: none !important; background: transparent !important; padding: 0 !important; font-size: 7px !important; transform: none !important; }
-    textarea { min-height: 15px; }
-    .signature-section { gap: 6px; margin-top: 4px; }
+    .field label { font-size: 5px; margin-bottom: 1px; }
+    .field input { padding: 1px 2px; font-size: 6px; border: 1px solid #999; border-radius: 0; transform: none !important; }
+    .sample-card, .phys-card, .ccs-card { border: 1px solid #999; padding: 4px; margin-bottom: 4px; }
+    .sample-card .badge, .phys-card .badge, .ccs-card .badge { background: #2d5a87 !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 6px; }
+    .sample-card h4, .phys-card h4, .ccs-card h4 { font-size: 6px; margin-bottom: 2px; padding-bottom: 1px; }
+    .row-group, .phys-row, .ccs-row { gap: 2px; }
+    .row-group .field label, .phys-row .field label, .ccs-row .field label { font-size: 5px; }
+    .row-group .field input, .phys-row .field input, .ccs-row .field input { padding: 1px; font-size: 6px; border: 1px solid #999; border-radius: 0; }
+    .result-group, .phys-result, .ccs-result { gap: 2px; margin-top: 2px; padding-top: 2px; }
+    .result-box { padding: 2px; border-radius: 0; background: #eee !important; }
+    .result-box .label { font-size: 5px; }
+    .result-box .value { font-size: 6px; }
+    .signature-section { gap: 4px; margin-top: 4px; }
     .signature-box { padding: 2px; }
-    .signature-box label { font-size: 6px; }
-    .signature-box input { font-size: 7px; border-bottom: 1px solid #666; }
+    .signature-box label { font-size: 5px; }
+    .signature-box input { font-size: 6px; border-bottom: 1px solid #666; }
     .sample-counter { display: none !important; }
-    .phys-title { font-size: 7px; padding: 1px 3px; }
     .tabs { display: none !important; }
-    table { min-width: 100%; }
     @page { size: A4 landscape; margin: 4mm; }
   }
   @page { size: A4 landscape; margin: 6mm; }
@@ -337,8 +402,8 @@ html
 
   <header>
     <div>
-      <h1>🔥 داشبورد گزارش پخت آجر نسوز</h1>
-      <div class="company">دیرگداز مهر آریان فارس — سروستان ۲</div>
+      <h1>🔥 گزارش پخت آجر نسوز</h1>
+      <div class="company">دیرگداز مهر آریان فارس</div>
     </div>
     <div class="toolbar no-print">
       <button class="btn-primary" onclick="saveData()">💾 ذخیره</button>
@@ -349,11 +414,12 @@ html
   </header>
 
   <div class="tabs no-print">
-    <button class="tab-btn active" onclick="switchTab('dash')">📊 داشبورد و ابعاد</button>
+    <button class="tab-btn active" onclick="switchTab('dash')">📊 ابعاد</button>
     <button class="tab-btn" onclick="switchTab('phys')">🧪 خواص فیزیکی</button>
     <button class="tab-btn" onclick="switchTab('print')">🖨️ چاپ و امضا</button>
   </div>
 
+  <!-- TAB 1: DASHBOARD -->
   <div id="tab-dash" class="tab-content active">
     <div class="card">
       <div class="card-title">اطلاعات پخت</div>
@@ -375,29 +441,11 @@ html
         <span class="count" id="sampleCount">2</span>
         <button onclick="changeSamples(1)" id="btnPlus">+</button>
       </div>
-
-      <table style="margin-bottom:10px;">
-        <thead>
-          <tr>
-            <th style="width:45px;">استاندارد</th>
-            <th>طول</th><th>عرض</th><th>ارتفاع جلو</th><th>ارتفاع عقب</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="row-label" style="text-align:center; background:#eff6ff; color:#1e40af;">مشترک</td>
-            <td class="standard"><input type="number" id="stdLen" value="230" step="0.1"></td>
-            <td class="standard"><input type="number" id="stdWid" value="114" step="0.1"></td>
-            <td class="standard"><input type="number" id="stdHF" value="76" step="0.1"></td>
-            <td class="standard"><input type="number" id="stdHB" value="76" step="0.1"></td>
-          </tr>
-        </tbody>
-      </table>
-
       <div id="samplesContainer"></div>
     </div>
   </div>
 
+  <!-- TAB 2: PHYSICAL PROPERTIES -->
   <div id="tab-phys" class="tab-content">
     <div class="card">
       <div class="card-title">اطلاعات آزمایش</div>
@@ -417,11 +465,12 @@ html
     </div>
 
     <div class="card">
-      <div class="card-title">مقاومت فشاری آجر در حالت سرد (CCS)</div>
+      <div class="card-title">مقاومت فشاری (CCS)</div>
       <div id="ccsContainer"></div>
     </div>
   </div>
 
+  <!-- TAB 3: PRINT -->
   <div id="tab-print" class="tab-content">
     <div class="card">
       <div class="card-title">توضیحات و امضاها</div>
@@ -431,11 +480,11 @@ html
       </div>
       <div class="signature-section">
         <div class="signature-box">
-          <label>نام و امضا بازرس کنترل کیفیت</label>
+          <label>بازرس کنترل کیفیت</label>
           <input type="text" id="inspectorName">
         </div>
         <div class="signature-box">
-          <label>نام و امضا مدیر کنترل کیفیت</label>
+          <label>مدیر کنترل کیفیت</label>
           <input type="text" id="managerName">
         </div>
       </div>
@@ -443,7 +492,7 @@ html
   </div>
 
 </div>
-html
+
 <script>
 const MAX_SAMPLES = 10;
 let sampleCount = 2;
@@ -476,116 +525,130 @@ function restoreValues() {
   });
 }
 
+// طراحی جدید ابعاد: کارت‌های عمودی
 function renderSamples() {
   collectValues();
   const container = document.getElementById('samplesContainer');
-  let html = '<table><thead><tr>' +
-    '<th style="width:35px;">نمونه</th><th style="width:50px;">وضعیت</th>' +
-    '<th>طول</th><th>عرض</th><th>ارتفاع جلو</th><th>ارتفاع عقب</th><th>وزن (g)</th><th>دانسیته</th>' +
-    '</tr></thead><tbody>';
+  let html = '';
 
   for (let i = 1; i <= sampleCount; i++) {
     html += `
-      <tr>
-        <td class="sample-label" rowspan="4">${i}</td>
-        <td class="row-label">قبل پخت</td>
-        <td class="before"><input type="number" id="s${i}_befLen" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="before"><input type="number" id="s${i}_befWid" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="before"><input type="number" id="s${i}_befHF" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="before"><input type="number" id="s${i}_befHB" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="before"><input type="number" id="s${i}_befW" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="calc-result" id="s${i}_befDens">—</td>
-      </tr>
-      <tr>
-        <td class="row-label">بعد پخت</td>
-        <td class="after"><input type="number" id="s${i}_aftLen" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="after"><input type="number" id="s${i}_aftWid" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="after"><input type="number" id="s${i}_aftHF" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="after"><input type="number" id="s${i}_aftHB" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="after"><input type="number" id="s${i}_aftW" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="calc-result" id="s${i}_aftDens">—</td>
-      </tr>
-      <tr>
-        <td class="row-label">شرینکیج %</td>
-        <td class="shrink" id="s${i}_shrLen">—</td>
-        <td class="shrink" id="s${i}_shrWid">—</td>
-        <td class="shrink" id="s${i}_shrHF">—</td>
-        <td class="shrink" id="s${i}_shrHB">—</td>
-        <td class="shrink" id="s${i}_shrW">—</td>
-        <td class="shrink" id="s${i}_shrDens">—</td>
-      </tr>
-      <tr style="height:3px;"><td colspan="8" style="padding:0; border:none; background:#f9fafb;"></td></tr>
+      <div class="sample-card">
+        <div class="badge">نمونه ${i}</div>
+        <h4>قبل پخت</h4>
+        <div class="row-group">
+          <div class="field"><label>طول</label><input type="number" id="s${i}_befLen" step="0.1" oninput="calcSample(${i})"></div>
+          <div class="field"><label>عرض</label><input type="number" id="s${i}_befWid" step="0.1" oninput="calcSample(${i})"></div>
+        </div>
+        <div class="row-group">
+          <div class="field"><label>ارتفاع جلو</label><input type="number" id="s${i}_befHF" step="0.1" oninput="calcSample(${i})"></div>
+          <div class="field"><label>ارتفاع عقب</label><input type="number" id="s${i}_befHB" step="0.1" oninput="calcSample(${i})"></div>
+        </div>
+        <div class="field" style="margin-bottom:4px;"><label>وزن (g)</label><input type="number" id="s${i}_befW" step="0.1" oninput="calcSample(${i})"></div>
+
+        <h4>بعد پخت</h4>
+        <div class="row-group">
+          <div class="field"><label>طول</label><input type="number" id="s${i}_aftLen" step="0.1" oninput="calcSample(${i})"></div>
+          <div class="field"><label>عرض</label><input type="number" id="s${i}_aftWid" step="0.1" oninput="calcSample(${i})"></div>
+        </div>
+        <div class="row-group">
+          <div class="field"><label>ارتفاع جلو</label><input type="number" id="s${i}_aftHF" step="0.1" oninput="calcSample(${i})"></div>
+          <div class="field"><label>ارتفاع عقب</label><input type="number" id="s${i}_aftHB" step="0.1" oninput="calcSample(${i})"></div>
+        </div>
+        <div class="field" style="margin-bottom:4px;"><label>وزن (g)</label><input type="number" id="s${i}_aftW" step="0.1" oninput="calcSample(${i})"></div>
+
+        <div class="result-group">
+          <div class="result-box"><div class="label">دانسیته قبل</div><div class="value" id="s${i}_befDens">—</div></div>
+          <div class="result-box"><div class="label">دانسیته بعد</div><div class="value" id="s${i}_aftDens">—</div></div>
+        </div>
+        <div class="result-group" style="border-top:none; margin-top:4px; padding-top:0;">
+          <div class="result-box shrink"><div class="label">شرینکیج طول</div><div class="value" id="s${i}_shrLen">—</div></div>
+          <div class="result-box shrink"><div class="label">شرینکیج عرض</div><div class="value" id="s${i}_shrWid">—</div></div>
+        </div>
+        <div class="result-group" style="border-top:none; margin-top:4px; padding-top:0;">
+          <div class="result-box shrink"><div class="label">شرینکیج ارتفاع جلو</div><div class="value" id="s${i}_shrHF">—</div></div>
+          <div class="result-box shrink"><div class="label">شرینکیج ارتفاع عقب</div><div class="value" id="s${i}_shrHB">—</div></div>
+        </div>
+        <div class="result-group" style="border-top:none; margin-top:4px; padding-top:0;">
+          <div class="result-box shrink"><div class="label">شرینکیج وزن</div><div class="value" id="s${i}_shrW">—</div></div>
+          <div class="result-box shrink"><div class="label">شرینکیج دانسیته</div><div class="value" id="s${i}_shrDens">—</div></div>
+        </div>
+      </div>
     `;
   }
-  html += '</tbody></table>';
   container.innerHTML = html;
   restoreValues();
   for (let i = 1; i <= sampleCount; i++) calcSample(i);
 }
 
+// طراحی جدید خواص فیزیکی: کارت‌های عمودی
 function renderPhys() {
   collectValues();
   const container = document.getElementById('physContainer');
-  let html = '<table><thead><tr>' +
-    '<th style="width:40px;">نمونه</th><th style="width:60px;">قالب محصول</th><th style="width:60px;">کیفیت</th><th style="width:50px;">ناحیه برش</th>' +
-    '<th>W1</th><th>W2</th><th>W3</th><th>AP(%)</th><th>WA(%)</th><th>ASG</th><th>BD</th>' +
-    '</tr></thead><tbody>';
+  let html = '';
 
   for (let i = 1; i <= sampleCount; i++) {
     const isTop = (i % 2 === 1);
     const rowLabel = isTop ? 'سر' : 'ته';
-    const bgClass = isTop ? 'before' : 'after';
 
     html += `
-      <tr>
-        <td class="sample-label" rowspan="2">${i}</td>
-        <td><input type="text" id="p${i}_mold" placeholder="B320 A"></td>
-        <td><input type="text" id="p${i}_quality" placeholder="SPINEL"></td>
-        <td class="row-label">${rowLabel}</td>
-        <td class="${bgClass}"><input type="number" id="p${i}_W1" step="0.1" oninput="calcPhys(${i})"></td>
-        <td class="${bgClass}"><input type="number" id="p${i}_W2" step="0.1" oninput="calcPhys(${i})"></td>
-        <td class="${bgClass}"><input type="number" id="p${i}_W3" step="0.1" oninput="calcPhys(${i})"></td>
-        <td class="calc-result" id="p${i}_AP">—</td>
-        <td class="calc-result" id="p${i}_WA">—</td>
-        <td class="calc-result" id="p${i}_ASG">—</td>
-        <td class="calc-result" id="p${i}_BD">—</td>
-      </tr>
-      <tr style="height:2px;"><td colspan="11" style="padding:0; border:none; background:#f9fafb;"></td></tr>
+      <div class="phys-card">
+        <div class="badge">نمونه ${i} (${rowLabel})</div>
+        <h4>مشخصات نمونه</h4>
+        <div class="row-group">
+          <div class="field"><label>قالب محصول</label><input type="text" id="p${i}_mold" placeholder="B320 A"></div>
+          <div class="field"><label>کیفیت</label><input type="text" id="p${i}_quality" placeholder="SPINEL"></div>
+        </div>
+        <h4>وزن‌ها (گرم)</h4>
+        <div class="phys-row">
+          <div class="field"><label>W1</label><input type="number" id="p${i}_W1" step="0.1" oninput="calcPhys(${i})"></div>
+          <div class="field"><label>W2</label><input type="number" id="p${i}_W2" step="0.1" oninput="calcPhys(${i})"></div>
+          <div class="field"><label>W3</label><input type="number" id="p${i}_W3" step="0.1" oninput="calcPhys(${i})"></div>
+        </div>
+        <div class="phys-result">
+          <div class="result-box"><div class="label">AP(%)</div><div class="value" id="p${i}_AP">—</div></div>
+          <div class="result-box"><div class="label">WA(%)</div><div class="value" id="p${i}_WA">—</div></div>
+          <div class="result-box"><div class="label">ASG</div><div class="value" id="p${i}_ASG">—</div></div>
+          <div class="result-box"><div class="label">BD</div><div class="value" id="p${i}_BD">—</div></div>
+        </div>
+      </div>
     `;
   }
-  html += '</tbody></table>';
   container.innerHTML = html;
   restoreValues();
   for (let i = 1; i <= sampleCount; i++) calcPhys(i);
 }
 
+// طراحی جدید CCS: کارت‌های عمودی
 function renderCCS() {
   collectValues();
   const container = document.getElementById('ccsContainer');
-  let html = '<table><thead><tr>' +
-    '<th style="width:40px;">نمونه</th><th style="width:50px;">ناحیه برش</th><th style="width:60px;">نوع مواد</th><th style="width:60px;">قالب محصول</th>' +
-    '<th style="width:50px;">طول (cm)</th><th style="width:50px;">عرض (cm)</th><th style="width:60px;">بار (Kg)</th><th>CCS (Kg/Cm2)</th>' +
-    '</tr></thead><tbody>';
+  let html = '';
 
   for (let i = 1; i <= sampleCount; i++) {
     const isTop = (i % 2 === 1);
     const rowLabel = isTop ? 'سر' : 'ته';
-    const bgClass = isTop ? 'before' : 'after';
 
     html += `
-      <tr>
-        <td class="sample-label">${i}</td>
-        <td class="row-label">${rowLabel}</td>
-        <td><input type="text" id="c${i}_material" placeholder="SPINEL"></td>
-        <td><input type="text" id="c${i}_mold" placeholder="B320 A"></td>
-        <td class="${bgClass}"><input type="number" id="c${i}_len" step="0.1" oninput="calcCCS(${i})"></td>
-        <td class="${bgClass}"><input type="number" id="c${i}_wid" step="0.1" oninput="calcCCS(${i})"></td>
-        <td class="${bgClass}"><input type="number" id="c${i}_load" step="1" oninput="calcCCS(${i})"></td>
-        <td class="calc-result" id="c${i}_ccs">—</td>
-      </tr>
+      <div class="ccs-card">
+        <div class="badge">نمونه ${i} (${rowLabel})</div>
+        <h4>مشخصات نمونه</h4>
+        <div class="row-group">
+          <div class="field"><label>نوع مواد</label><input type="text" id="c${i}_material" placeholder="SPINEL"></div>
+          <div class="field"><label>قالب محصول</label><input type="text" id="c${i}_mold" placeholder="B320 A"></div>
+        </div>
+        <h4>ابعاد و بار</h4>
+        <div class="ccs-row">
+          <div class="field"><label>طول (cm)</label><input type="number" id="c${i}_len" step="0.1" oninput="calcCCS(${i})"></div>
+          <div class="field"><label>عرض (cm)</label><input type="number" id="c${i}_wid" step="0.1" oninput="calcCCS(${i})"></div>
+          <div class="field"><label>بار (Kg)</label><input type="number" id="c${i}_load" step="1" oninput="calcCCS(${i})"></div>
+        </div>
+        <div class="ccs-result">
+          <div class="result-box"><div class="label">CCS (Kg/Cm2)</div><div class="value" id="c${i}_ccs">—</div></div>
+        </div>
+      </div>
     `;
   }
-  html += '</tbody></table>';
   container.innerHTML = html;
   restoreValues();
   for (let i = 1; i <= sampleCount; i++) calcCCS(i);
@@ -614,6 +677,8 @@ function calcPhys(i) {
   const S = num(document.getElementById('physS')?.value) || 0.8;
   const W1=g('W1'), W2=g('W2'), W3=g('W3');
   
+  const AP  = (W1 && W2 && W3 && (W3 - W2) !== 0) ?
+   javascript
   const AP  = (W1 && W2 && W3 && (W3 - W2) !== 0) ? ((W3 - W1) / (W3 - W2)) * 100 : null;
   const WA  = (W1 && W3) ? ((W3 - W1) / W1) * 125 : null;
   const ASG = (W1 && W2 && (W1 - W2) !== 0) ? (W1 / (W1 - W2)) * S : null;
@@ -647,7 +712,7 @@ function changeSamples(delta) {
   renderCCS();
 }
 
-const STORAGE_KEY = 'refractory_v13';
+const STORAGE_KEY = 'refractory_v14';
 
 function collectAll() {
   const data = { sampleCount };
@@ -725,3 +790,5 @@ window.addEventListener('DOMContentLoaded', () => {
   renderCCS();
 });
 </script>
+</body>
+</html>
