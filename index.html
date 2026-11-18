@@ -663,24 +663,3 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-🛠️ قدم ۲: کد جدید sw.js
-برو به فایل sw.js، کل کد قبلی را پاک کن و این را جایگزین کن (نسخه v8):
-
-javascript
-const CACHE_NAME = 'refractory-v8';
-
-self.addEventListener('install', (e) => {
-  self.skipWaiting();
-});
-
-self.addEventListener('activate', (e) => {
-  e.waitUntil(self.clients.claim());
-});
-
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
-    })
-  );
-});
