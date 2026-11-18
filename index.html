@@ -5,9 +5,6 @@ html
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#1e3a5f">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="گزارش پخت">
 <title>گزارش پخت آجر نسوز</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="icon-192.png">
@@ -19,10 +16,12 @@ html
     background: #f0f2f5;
     color: #1a1a2e;
     padding: 16px;
-    font-size: 12px;
+    font-size: 13px;
     padding-top: max(16px, env(safe-area-inset-top));
   }
   .container { max-width: 1200px; margin: 0 auto; }
+  
+  /* Header & Dashboard Tabs */
   header {
     background: linear-gradient(135deg, #1e3a5f, #2d5a87);
     color: white;
@@ -36,12 +35,13 @@ html
     flex-wrap: wrap;
     gap: 10px;
   }
-  header h1 { font-size: 16px; }
-  header .company { font-size: 11px; opacity: 0.85; margin-top: 2px; }
+  header h1 { font-size: 16px; margin-bottom: 4px; }
+  header .company { font-size: 11px; opacity: 0.85; }
   .toolbar { display: flex; gap: 6px; flex-wrap: wrap; }
+  
   button {
     font-family: inherit;
-    padding: 7px 14px;
+    padding: 8px 14px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -50,24 +50,52 @@ html
     transition: all 0.2s;
   }
   .btn-primary { background: #2d5a87; color: white; }
-  .btn-primary:hover { background: #1e3a5f; }
   .btn-print { background: #f59e0b; color: white; }
   .btn-danger { background: #ef4444; color: white; }
   .btn-success { background: #10b981; color: white; }
+  
+  /* Tabs Navigation */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 8px;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    background: transparent;
+    color: #6b7280;
+    padding: 10px 20px;
+    border-radius: 8px 8px 0 0;
+    font-size: 14px;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+  }
+  .tab-btn.active {
+    background: white;
+    color: #1e3a5f;
+    border-bottom-color: #2d5a87;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
+    font-weight: 700;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
 
+  /* Cards & Forms */
   .card {
     background: white;
     border-radius: 10px;
-    padding: 14px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   }
   .card-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     color: #1e3a5f;
-    margin-bottom: 10px;
-    padding-bottom: 6px;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
     border-bottom: 2px solid #e5e7eb;
     display: flex;
     align-items: center;
@@ -75,51 +103,52 @@ html
   }
   .card-title::before {
     content: '';
-    width: 4px; height: 14px;
+    width: 4px; height: 16px;
     background: #2d5a87;
     border-radius: 2px;
   }
 
   .form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 8px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
   }
   .field label {
     display: block;
-    font-size: 10px;
+    font-size: 11px;
     color: #6b7280;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
     font-weight: 600;
   }
   .field input, .field select {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     border: 1.5px solid #e5e7eb;
-    border-radius: 6px;
+    border-radius: 8px;
     font-family: inherit;
     font-size: 14px;
     background: #fafbfc;
   }
   .field input:focus { outline: none; border-color: #2d5a87; background: white; }
 
+  /* Sample Counter */
   .sample-counter {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
+    gap: 12px;
+    padding: 10px 14px;
     background: #f3f4f6;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    border-radius: 10px;
+    margin-bottom: 16px;
     font-weight: 700;
     color: #1e3a5f;
-    font-size: 13px;
+    font-size: 14px;
     flex-wrap: wrap;
   }
   .sample-counter button {
-    width: 36px; height: 36px;
+    width: 40px; height: 40px;
     border-radius: 50%;
-    font-size: 20px;
+    font-size: 22px;
     padding: 0;
     display: flex;
     align-items: center;
@@ -128,30 +157,32 @@ html
     color: white;
   }
   .sample-counter button:disabled { background: #cbd5e1; cursor: not-allowed; }
-  .sample-counter .count { font-size: 18px; min-width: 30px; text-align: center; }
+  .sample-counter .count { font-size: 20px; min-width: 40px; text-align: center; }
 
+  /* Tables */
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 11px;
+    font-size: 12px;
+    margin-top: 10px;
   }
   th, td {
     border: 1px solid #e5e7eb;
-    padding: 4px 6px;
+    padding: 6px 8px;
     text-align: center;
   }
   th {
     background: #f3f4f6;
     font-weight: 700;
     color: #374151;
-    font-size: 10px;
+    font-size: 11px;
   }
   td.row-label {
     background: #f9fafb;
     font-weight: 700;
     text-align: right;
     padding-right: 8px;
-    font-size: 10px;
+    font-size: 11px;
   }
   td.sample-label {
     background: #2d5a87;
@@ -181,81 +212,64 @@ html
     background: white;
   }
 
-  .phys-section { margin-top: 10px; padding-top: 10px; border-top: 1.5px dashed #cbd5e1; }
+  /* Physical Properties */
+  .phys-section { margin-top: 16px; padding-top: 16px; border-top: 1.5px dashed #cbd5e1; }
   .phys-section:first-child { border-top: none; padding-top: 0; margin-top: 0; }
   .phys-title {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     color: #2d5a87;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     background: #eff6ff;
-    padding: 4px 8px;
-    border-radius: 4px;
+    padding: 6px 10px;
+    border-radius: 6px;
     display: inline-block;
   }
 
+  /* Signatures */
   .signature-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-top: 12px;
+    gap: 20px;
+    margin-top: 16px;
   }
   .signature-box {
     border: 1.5px dashed #cbd5e1;
-    border-radius: 8px;
-    padding: 10px;
+    border-radius: 10px;
+    padding: 14px;
     text-align: center;
   }
   .signature-box label {
     display: block;
-    font-size: 10px;
+    font-size: 11px;
     color: #6b7280;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
     font-weight: 600;
   }
   .signature-box input {
     width: 100%;
     border: none;
     border-bottom: 1.5px solid #2d5a87;
-    padding: 6px;
+    padding: 8px;
     text-align: center;
     font-family: inherit;
-    font-size: 13px;
+    font-size: 14px;
     background: transparent;
   }
   textarea {
     width: 100%;
-    padding: 8px;
+    padding: 12px;
     border: 1.5px solid #e5e7eb;
-    border-radius: 6px;
+    border-radius: 8px;
     font-family: inherit;
     font-size: 13px;
-    min-height: 50px;
+    min-height: 80px;
     resize: vertical;
     background: #fafbfc;
   }
   textarea:focus { outline: none; border-color: #2d5a87; background: white; }
 
-  .install-banner {
-    background: linear-gradient(135deg, #10b981, #059669);
-    color: white;
-    padding: 14px 20px;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .install-banner.hidden { display: none; }
-  .install-banner button {
-    background: white;
-    color: #059669;
-    padding: 8px 18px;
-    font-weight: 700;
-  }
-
+  /* Print Styles */
   @media print {
     body { background: white; padding: 0; font-size: 8px; }
     .no-print { display: none !important; }
@@ -263,13 +277,15 @@ html
     header { background: #1e3a5f !important; padding: 6px 10px; margin-bottom: 4px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     header h1 { font-size: 11px; }
     header .company { font-size: 8px; }
-    .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; margin-bottom: 3px; padding: 5px; border-radius: 0; }
+    .tab-content { display: block !important; page-break-after: always; }
+    .tab-content:last-child { page-break-after: avoid; }
+    .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; margin-bottom: 8px; padding: 5px; border-radius: 0; }
     .card-title { font-size: 9px; margin-bottom: 4px; padding-bottom: 2px; border-bottom-width: 1px; }
     .form-grid { gap: 3px; }
     .field label { font-size: 7px; margin-bottom: 1px; }
     .field input { padding: 2px 4px; font-size: 8px; border: 1px solid #999; border-radius: 0; }
     th, td { border: 1px solid #999 !important; font-size: 7px; padding: 1px 2px; }
-    th { background: #e5e7eb !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 7px; }
+    th { background: #e5e7eb !important; font-size: 7px; }
     td.sample-label { background: #2d5a87 !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     td.standard, td.before, td.after, td.shrink, td.calc-result { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     td.row-label { font-size: 7px; }
@@ -279,8 +295,9 @@ html
     .signature-box { padding: 4px; }
     .signature-box label { font-size: 7px; }
     .signature-box input { font-size: 8px; border-bottom: 1px solid #666; }
-    .sample-counter, .install-banner { display: none !important; }
+    .sample-counter { display: none !important; }
     .phys-title { font-size: 8px; padding: 2px 4px; }
+    .tabs { display: none !important; }
     @page { size: A4 landscape; margin: 6mm; }
   }
   @page { size: A4 landscape; margin: 8mm; }
@@ -289,87 +306,96 @@ html
 <body>
 <div class="container">
 
-  <div class="install-banner no-print hidden" id="installBanner">
-    <span>📱 نرم‌افزار رو نصب کن!</span>
-    <button onclick="installApp()">نصب کن</button>
-  </div>
-
   <header>
     <div>
-      <h1>🔥 گزارش اختلاف ابعاد قبل و بعد از پخت</h1>
+      <h1>🔥 داشبورد گزارش پخت آجر نسوز</h1>
       <div class="company">دیرگداز مهر آریان فارس — سروستان ۲</div>
     </div>
     <div class="toolbar no-print">
       <button class="btn-primary" onclick="saveData()">💾 ذخیره</button>
-      <button class="btn-print" onclick="window.print()">🖨️ چاپ A4</button>
+      <button class="btn-print" onclick="window.print()">🖨️ چاپ</button>
       <button class="btn-success" onclick="exportJSON()">📤 خروجی</button>
       <button class="btn-danger" onclick="resetForm()">🗑️ پاک کردن</button>
     </div>
   </header>
 
-  <div class="card">
-    <div class="card-title">اطلاعات پخت</div>
-    <div class="form-grid">
-      <div class="field"><label>شماره پخت</label><input type="text" id="batchNo"></div>
-      <div class="field"><label>دمای پخت (°C)</label><input type="number" id="temp"></div>
-      <div class="field"><label>تاریخ شروع</label><input type="text" id="dateStart"></div>
-      <div class="field"><label>تاریخ اتمام</label><input type="text" id="dateEnd"></div>
-      <div class="field"><label>کیفیت محصول</label><input type="text" id="quality"></div>
-      <div class="field"><label>نوع قالب</label><input type="text" id="moldType"></div>
-    </div>
+  <!-- Navigation Tabs -->
+  <div class="tabs no-print">
+    <button class="tab-btn active" onclick="switchTab('dash')">📊 داشبورد و ابعاد</button>
+    <button class="tab-btn" onclick="switchTab('phys')">🧪 خواص فیزیکی</button>
+    <button class="tab-btn" onclick="switchTab('print')">🖨️ چاپ و امضا</button>
   </div>
 
-  <div class="card">
-    <div class="card-title">نمونه‌ها</div>
-
-    <div class="sample-counter no-print">
-      <span>تعداد نمونه:</span>
-      <button onclick="changeSamples(-1)" id="btnMinus">−</button>
-      <span class="count" id="sampleCount">2</span>
-      <button onclick="changeSamples(1)" id="btnPlus">+</button>
-      <span style="margin-right:auto; font-size:10px; color:#6b7280; font-weight:400;">حداکثر ۱۰ نمونه</span>
-    </div>
-
-    <table style="margin-bottom:8px;">
-      <thead>
-        <tr>
-          <th style="width:50px;">استاندارد</th>
-          <th>طول</th><th>عرض</th><th>ارتفاع جلو</th><th>ارتفاع عقب</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="row-label" style="text-align:center; background:#eff6ff; color:#1e40af;">مشترک</td>
-          <td class="standard"><input type="number" id="stdLen" value="230" step="0.1"></td>
-          <td class="standard"><input type="number" id="stdWid" value="114" step="0.1"></td>
-          <td class="standard"><input type="number" id="stdHF" value="76" step="0.1"></td>
-          <td class="standard"><input type="number" id="stdHB" value="76" step="0.1"></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div id="samplesContainer"></div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">خواص فیزیکی</div>
-    <div id="physContainer"></div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">توضیحات و امضاها</div>
-    <div class="field" style="margin-bottom:10px">
-      <label>توضیحات</label>
-      <textarea id="notes" placeholder="آجر تولید شده با ضایعات دریچه کشویی پخت شده در کوره دوار ..."></textarea>
-    </div>
-    <div class="signature-section">
-      <div class="signature-box">
-        <label>نام و امضا بازرس کنترل کیفیت</label>
-        <input type="text" id="inspectorName">
+  <!-- TAB 1: DASHBOARD & DIMENSIONS -->
+  <div id="tab-dash" class="tab-content active">
+    <div class="card">
+      <div class="card-title">اطلاعات پخت</div>
+      <div class="form-grid">
+        <div class="field"><label>شماره پخت</label><input type="text" id="batchNo"></div>
+        <div class="field"><label>دمای پخت (°C)</label><input type="number" id="temp"></div>
+        <div class="field"><label>تاریخ شروع</label><input type="text" id="dateStart"></div>
+        <div class="field"><label>تاریخ اتمام</label><input type="text" id="dateEnd"></div>
+        <div class="field"><label>کیفیت محصول</label><input type="text" id="quality"></div>
+        <div class="field"><label>نوع قالب</label><input type="text" id="moldType"></div>
       </div>
-      <div class="signature-box">
-        <label>نام و امضا مدیر کنترل کیفیت</label>
-        <input type="text" id="managerName">
+    </div>
+
+    <div class="card">
+      <div class="card-title">ابعاد نمونه‌ها</div>
+      <div class="sample-counter no-print">
+        <span>تعداد نمونه:</span>
+        <button onclick="changeSamples(-1)" id="btnMinus">−</button>
+        <span class="count" id="sampleCount">2</span>
+        <button onclick="changeSamples(1)" id="btnPlus">+</button>
+      </div>
+
+      <table style="margin-bottom:16px;">
+        <thead>
+          <tr>
+            <th style="width:50px;">استاندارد</th>
+            <th>طول</th><th>عرض</th><th>ارتفاع جلو</th><th>ارتفاع عقب</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="row-label" style="text-align:center; background:#eff6ff; color:#1e40af;">مشترک</td>
+            <td class="standard"><input type="number" id="stdLen" value="230" step="0.1"></td>
+            <td class="standard"><input type="number" id="stdWid" value="114" step="0.1"></td>
+            <td class="standard"><input type="number" id="stdHF" value="76" step="0.1"></td>
+            <td class="standard"><input type="number" id="stdHB" value="76" step="0.1"></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div id="samplesContainer"></div>
+    </div>
+  </div>
+
+  <!-- TAB 2: PHYSICAL PROPERTIES -->
+  <div id="tab-phys" class="tab-content">
+    <div class="card">
+      <div class="card-title">خواص فیزیکی</div>
+      <div id="physContainer"></div>
+    </div>
+  </div>
+
+  <!-- TAB 3: PRINT & SIGNATURES -->
+  <div id="tab-print" class="tab-content">
+    <div class="card">
+      <div class="card-title">توضیحات و امضاها</div>
+      <div class="field" style="margin-bottom:16px">
+        <label>توضیحات</label>
+        <textarea id="notes" placeholder="آجر تولید شده با ضایعات دریچه کشویی پخت شده در کوره دوار ..."></textarea>
+      </div>
+      <div class="signature-section">
+        <div class="signature-box">
+          <label>نام و امضا بازرس کنترل کیفیت</label>
+          <input type="text" id="inspectorName">
+        </div>
+        <div class="signature-box">
+          <label>نام و امضا مدیر کنترل کیفیت</label>
+          <input type="text" id="managerName">
+        </div>
       </div>
     </div>
   </div>
@@ -380,7 +406,13 @@ html
 const MAX_SAMPLES = 10;
 let sampleCount = 2;
 let savedValues = {};
-let deferredPrompt = null;
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  event.target.classList.add('active');
+}
 
 function num(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
 function fmt(n, d=2) { if (n === null || n === undefined || isNaN(n)) return '—'; return n.toFixed(d); }
@@ -581,28 +613,6 @@ function exportJSON() {
   a.click();
   URL.revokeObjectURL(url);
 }
-
-function installApp() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(choice => {
-      if (choice.outcome === 'accepted') {
-        document.getElementById('installBanner').classList.add('hidden');
-      }
-      deferredPrompt = null;
-    });
-  }
-}
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  document.getElementById('installBanner').classList.remove('hidden');
-});
-
-window.addEventListener('appinstalled', () => {
-  document.getElementById('installBanner').classList.add('hidden');
-});
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
