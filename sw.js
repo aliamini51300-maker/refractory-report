@@ -1,5 +1,5 @@
 javascript
-const CACHE_NAME = 'refractory-v2';
+const CACHE_NAME = 'refractory-pwa-v3';
 const ASSETS = [
   './',
   './index.html',
@@ -9,23 +9,28 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', (e) => {
+  self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      return Promise.allSettled(
-        ASSETS.map(url => cache.add(url).catch(err => console.log('Failed to cache:', url)))
-      );
+      return cache.addAll(ASSETS);
     })
   );
-  self.skipWaiting();
 });
 
 self.addEventListener('activate', (e) => {
   e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
-    )
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
+        })
+      );
+    }).then(() => {
+      return self.clients.claim();
+    })
   );
-  self.clients.claim();
 });
 
 self.addEventListener('fetch', (e) => {
