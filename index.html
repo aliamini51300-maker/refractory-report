@@ -20,8 +20,6 @@ html
     padding-top: max(10px, env(safe-area-inset-top));
   }
   .container { max-width: 700px; margin: 0 auto; }
-  
-  /* Header */
   header {
     background: linear-gradient(135deg, #1e3a5f, #2d5a87);
     color: white;
@@ -38,7 +36,6 @@ html
   header h1 { font-size: 15px; margin-bottom: 2px; }
   header .company { font-size: 10px; opacity: 0.85; }
   .toolbar { display: flex; gap: 6px; flex-wrap: wrap; }
-  
   button {
     font-family: inherit;
     padding: 8px 12px;
@@ -53,8 +50,6 @@ html
   .btn-print { background: #f59e0b; color: white; }
   .btn-danger { background: #ef4444; color: white; }
   .btn-success { background: #10b981; color: white; }
-  
-  /* Tabs */
   .tabs {
     display: flex;
     gap: 4px;
@@ -81,8 +76,6 @@ html
   }
   .tab-content { display: none; }
   .tab-content.active { display: block; }
-
-  /* Cards */
   .card {
     background: white;
     border-radius: 10px;
@@ -107,8 +100,6 @@ html
     background: #2d5a87;
     border-radius: 2px;
   }
-
-  /* Form Grid for top info */
   .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -134,16 +125,11 @@ html
     transition: all 0.2s;
   }
   .field input:focus { 
-    outline: none; 
-    border-color: #2d5a87; 
-    background: white; 
-    transform: scale(1.02);
-    z-index: 10;
+    outline: none; border-color: #2d5a87; background: white; 
+    transform: scale(1.02); z-index: 10;
     box-shadow: 0 2px 8px rgba(45,90,135,0.15);
   }
-
-  /* Sample Cards */
-  .sample-card {
+  .sample-card, .phys-card, .ccs-card {
     border: 1.5px solid #e5e7eb;
     border-radius: 10px;
     padding: 12px;
@@ -151,255 +137,86 @@ html
     background: #fafbfc;
     position: relative;
   }
-  .sample-card .badge {
-    position: absolute;
-    top: -10px;
-    right: 12px;
-    background: #2d5a87;
-    color: white;
-    padding: 2px 10px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 700;
+  .sample-card .badge, .phys-card .badge, .ccs-card .badge {
+    position: absolute; top: -10px; right: 12px;
+    background: #2d5a87; color: white;
+    padding: 2px 10px; border-radius: 12px;
+    font-size: 11px; font-weight: 700;
   }
-  .sample-card h4 {
-    font-size: 12px;
-    color: #374151;
-    margin-bottom: 8px;
-    margin-top: 4px;
-    padding-bottom: 4px;
-    border-bottom: 1px dashed #d1d5db;
+  .sample-card h4, .phys-card h4, .ccs-card h4 {
+    font-size: 12px; color: #374151; margin-bottom: 8px; margin-top: 4px;
+    padding-bottom: 4px; border-bottom: 1px dashed #d1d5db;
   }
-
-  .row-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-bottom: 6px;
-  }
-  .row-group .field label {
-    font-size: 9px;
-  }
-  .row-group .field input {
-    padding: 6px;
-    font-size: 14px;
-  }
-
-  .result-group {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px dashed #cbd5e1;
-  }
-  .result-box {
-    background: #e0e7ff;
-    border-radius: 6px;
-    padding: 6px 8px;
-    text-align: center;
-  }
+  .row-group { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+  .row-group .field label { font-size: 9px; }
+  .row-group .field input { padding: 6px; font-size: 14px; }
+  .result-group { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #cbd5e1; }
+  .result-box { background: #e0e7ff; border-radius: 6px; padding: 6px 8px; text-align: center; }
   .result-box .label { font-size: 9px; color: #4b5563; font-weight: 700; }
   .result-box .value { font-size: 15px; font-weight: 800; color: #1e3a5f; }
   .result-box.shrink { background: #fee2e2; }
   .result-box.shrink .value { color: #991b1b; }
-
   .sample-counter {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 12px;
-    background: #f3f4f6;
-    border-radius: 8px;
-    margin-bottom: 12px;
-    font-weight: 700;
-    color: #1e3a5f;
-    font-size: 13px;
-    justify-content: space-between;
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 12px; background: #f3f4f6; border-radius: 8px;
+    margin-bottom: 12px; font-weight: 700; color: #1e3a5f;
+    font-size: 13px; justify-content: space-between;
   }
   .sample-counter button {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    font-size: 18px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #2d5a87;
-    color: white;
+    width: 32px; height: 32px; border-radius: 50%; font-size: 18px; padding: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: #2d5a87; color: white;
   }
   .sample-counter button:disabled { background: #cbd5e1; cursor: not-allowed; }
   .sample-counter .count { font-size: 18px; min-width: 30px; text-align: center; }
-
-  /* Phys Cards */
-  .phys-card {
-    border: 1.5px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 12px;
-    margin-bottom: 12px;
-    background: #fafbfc;
-    position: relative;
-  }
-  .phys-card .badge {
-    position: absolute;
-    top: -10px;
-    right: 12px;
-    background: #2d5a87;
-    color: white;
-    padding: 2px 10px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 700;
-  }
-  .phys-card h4 {
-    font-size: 12px;
-    color: #374151;
-    margin-bottom: 8px;
-    margin-top: 4px;
-    padding-bottom: 4px;
-    border-bottom: 1px dashed #d1d5db;
-  }
   .phys-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 6px; }
   .phys-row .field label { font-size: 9px; }
   .phys-row .field input { padding: 6px; font-size: 14px; }
-
   .phys-result { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px; }
   .phys-result .result-box { background: #d1fae5; }
   .phys-result .result-box .value { color: #065f46; }
-
-  /* CCS Cards */
-  .ccs-card {
-    border: 1.5px solid #e5e7eb;
-    border-radius: 10px;
-    padding: 12px;
-    margin-bottom: 12px;
-    background: #fafbfc;
-    position: relative;
-  }
-  .ccs-card .badge {
-    position: absolute;
-    top: -10px;
-    right: 12px;
-    background: #2d5a87;
-    color: white;
-    padding: 2px 10px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 700;
-  }
-  .ccs-card h4 {
-    font-size: 12px;
-    color: #374151;
-    margin-bottom: 8px;
-    margin-top: 4px;
-    padding-bottom: 4px;
-    border-bottom: 1px dashed #d1d5db;
-  }
   .ccs-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 6px; }
   .ccs-row .field label { font-size: 9px; }
   .ccs-row .field input { padding: 6px; font-size: 14px; }
-
   .ccs-result { display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 8px; }
   .ccs-result .result-box { background: #fef3c7; }
   .ccs-result .result-box .value { color: #92400e; }
-
-  /* Signatures */
-  .signature-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 10px;
-  }
-  .signature-box {
-    border: 1.5px dashed #cbd5e1;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-  }
-  .signature-box label {
-    display: block;
-    font-size: 10px;
-    color: #6b7280;
-    margin-bottom: 4px;
-    font-weight: 700;
-  }
-  .signature-box input {
-    width: 100%;
-    border: none;
-    border-bottom: 1.5px solid #2d5a87;
-    padding: 6px;
-    text-align: center;
-    font-family: inherit;
-    font-size: 14px;
-    background: transparent;
-    font-weight: 600;
-    transition: all 0.2s;
-  }
-  .signature-box input:focus { 
-    outline: none; 
-    transform: scale(1.05); 
-    z-index: 10;
-  }
-  
-  textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1.5px solid #e5e7eb;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 14px;
-    min-height: 60px;
-    resize: vertical;
-    background: #fafbfc;
-    transition: all 0.2s;
-  }
-  textarea:focus { 
-    outline: none; 
-    border-color: #2d5a87; 
-    background: white; 
-    transform: scale(1.02); 
-    z-index: 10;
-  }
-
-  /* Print */
+  .signature-section { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+  .signature-box { border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; }
+  .signature-box label { display: block; font-size: 10px; color: #6b7280; margin-bottom: 4px; font-weight: 700; }
+  .signature-box input { width: 100%; border: none; border-bottom: 1.5px solid #2d5a87; padding: 6px; text-align: center; font-family: inherit; font-size: 14px; background: transparent; font-weight: 600; transition: all 0.2s; }
+  .signature-box input:focus { outline: none; transform: scale(1.05); z-index: 10; }
+  textarea { width: 100%; padding: 8px; border: 1.5px solid #e5e7eb; border-radius: 6px; font-family: inherit; font-size: 14px; min-height: 60px; resize: vertical; background: #fafbfc; transition: all 0.2s; }
+  textarea:focus { outline: none; border-color: #2d5a87; background: white; transform: scale(1.02); z-index: 10; }
   @media print {
     body { background: white; padding: 0; font-size: 7px; }
     .no-print { display: none !important; }
     .container { max-width: 100%; }
     header { background: #1e3a5f !important; padding: 4px 8px; margin-bottom: 4px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     header h1 { font-size: 10px; }
-    header .company { font-size: 7px; }
     .tab-content { display: block !important; page-break-after: always; }
     .tab-content:last-child { page-break-after: avoid; }
-    .card { box-shadow: none; border: 1px solid #999; page-break-inside: avoid; margin-bottom: 4px; padding: 4px; border-radius: 0; }
-    .card-title { font-size: 7px; margin-bottom: 2px; padding-bottom: 1px; border-bottom-width: 1px; }
+    .card { box-shadow: none; border: 1px solid #999; margin-bottom: 4px; padding: 4px; border-radius: 0; }
+    .card-title { font-size: 7px; margin-bottom: 2px; padding-bottom: 1px; }
     .form-grid { gap: 2px; }
     .field label { font-size: 5px; margin-bottom: 1px; }
     .field input { padding: 1px 2px; font-size: 6px; border: 1px solid #999; border-radius: 0; transform: none !important; }
     .sample-card, .phys-card, .ccs-card { border: 1px solid #999; padding: 4px; margin-bottom: 4px; }
-    .sample-card .badge, .phys-card .badge, .ccs-card .badge { background: #2d5a87 !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; font-size: 6px; }
-    .sample-card h4, .phys-card h4, .ccs-card h4 { font-size: 6px; margin-bottom: 2px; padding-bottom: 1px; }
+    .sample-card .badge, .phys-card .badge, .ccs-card .badge { background: #2d5a87 !important; color: white !important; font-size: 6px; }
+    .sample-card h4, .phys-card h4, .ccs-card h4 { font-size: 6px; margin-bottom: 2px; }
     .row-group, .phys-row, .ccs-row { gap: 2px; }
-    .row-group .field label, .phys-row .field label, .ccs-row .field label { font-size: 5px; }
-    .row-group .field input, .phys-row .field input, .ccs-row .field input { padding: 1px; font-size: 6px; border: 1px solid #999; border-radius: 0; }
     .result-group, .phys-result, .ccs-result { gap: 2px; margin-top: 2px; padding-top: 2px; }
     .result-box { padding: 2px; border-radius: 0; background: #eee !important; }
     .result-box .label { font-size: 5px; }
     .result-box .value { font-size: 6px; }
     .signature-section { gap: 4px; margin-top: 4px; }
-    .signature-box { padding: 2px; }
-    .signature-box label { font-size: 5px; }
-    .signature-box input { font-size: 6px; border-bottom: 1px solid #666; }
-    .sample-counter { display: none !important; }
     .tabs { display: none !important; }
     @page { size: A4 landscape; margin: 4mm; }
   }
-  @page { size: A4 landscape; margin: 6mm; }
 </style>
 </head>
 <body>
 <div class="container">
-
   <header>
     <div>
       <h1>🔥 گزارش پخت آجر نسوز</h1>
@@ -412,14 +229,12 @@ html
       <button class="btn-danger" onclick="resetForm()">🗑️ پاک کردن</button>
     </div>
   </header>
-
   <div class="tabs no-print">
     <button class="tab-btn active" onclick="switchTab('dash')">📊 ابعاد</button>
     <button class="tab-btn" onclick="switchTab('phys')">🧪 خواص فیزیکی</button>
     <button class="tab-btn" onclick="switchTab('print')">🖨️ چاپ و امضا</button>
   </div>
 
-  <!-- TAB 1: DASHBOARD -->
   <div id="tab-dash" class="tab-content active">
     <div class="card">
       <div class="card-title">اطلاعات پخت</div>
@@ -432,7 +247,6 @@ html
         <div class="field"><label>نوع قالب</label><input type="text" id="moldType"></div>
       </div>
     </div>
-
     <div class="card">
       <div class="card-title">ابعاد نمونه‌ها</div>
       <div class="sample-counter no-print">
@@ -445,7 +259,6 @@ html
     </div>
   </div>
 
-  <!-- TAB 2: PHYSICAL PROPERTIES -->
   <div id="tab-phys" class="tab-content">
     <div class="card">
       <div class="card-title">اطلاعات آزمایش</div>
@@ -458,19 +271,16 @@ html
         <div class="field"><label>وزن مخصوص نفت (S)</label><input type="number" id="physS" value="0.8" step="0.01"></div>
       </div>
     </div>
-
     <div class="card">
       <div class="card-title">نتایج خواص فیزیکی</div>
       <div id="physContainer"></div>
     </div>
-
     <div class="card">
       <div class="card-title">مقاومت فشاری (CCS)</div>
       <div id="ccsContainer"></div>
     </div>
   </div>
 
-  <!-- TAB 3: PRINT -->
   <div id="tab-print" class="tab-content">
     <div class="card">
       <div class="card-title">توضیحات و امضاها</div>
@@ -492,7 +302,7 @@ html
   </div>
 
 </div>
-
+html
 <script>
 const MAX_SAMPLES = 10;
 let sampleCount = 2;
@@ -525,7 +335,6 @@ function restoreValues() {
   });
 }
 
-// طراحی جدید ابعاد: کارت‌های عمودی
 function renderSamples() {
   collectValues();
   const container = document.getElementById('samplesContainer');
@@ -581,7 +390,6 @@ function renderSamples() {
   for (let i = 1; i <= sampleCount; i++) calcSample(i);
 }
 
-// طراحی جدید خواص فیزیکی: کارت‌های عمودی
 function renderPhys() {
   collectValues();
   const container = document.getElementById('physContainer');
@@ -619,7 +427,6 @@ function renderPhys() {
   for (let i = 1; i <= sampleCount; i++) calcPhys(i);
 }
 
-// طراحی جدید CCS: کارت‌های عمودی
 function renderCCS() {
   collectValues();
   const container = document.getElementById('ccsContainer');
@@ -677,8 +484,6 @@ function calcPhys(i) {
   const S = num(document.getElementById('physS')?.value) || 0.8;
   const W1=g('W1'), W2=g('W2'), W3=g('W3');
   
-  const AP  = (W1 && W2 && W3 && (W3 - W2) !== 0) ?
-   javascript
   const AP  = (W1 && W2 && W3 && (W3 - W2) !== 0) ? ((W3 - W1) / (W3 - W2)) * 100 : null;
   const WA  = (W1 && W3) ? ((W3 - W1) / W1) * 125 : null;
   const ASG = (W1 && W2 && (W1 - W2) !== 0) ? (W1 / (W1 - W2)) * S : null;
