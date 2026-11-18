@@ -1,4 +1,5 @@
-const CACHE_NAME = 'refractory-v13';
+javascript
+const CACHE_NAME = 'refractory-v14';
 
 self.addEventListener('install', (e) => {
   self.skipWaiting();
