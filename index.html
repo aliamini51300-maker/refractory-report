@@ -64,9 +64,9 @@ html
   .tab-btn {
     background: transparent;
     color: #6b7280;
-    padding: 12px 20px;
+    padding: 10px 18px;
     border-radius: 8px 8px 0 0;
-    font-size: 14px;
+    font-size: 13px;
     border-bottom: 3px solid transparent;
     white-space: nowrap;
   }
@@ -89,7 +89,7 @@ html
     overflow-x: auto; 
   }
   .card-title {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
     color: #1e3a5f;
     margin-bottom: 12px;
@@ -101,26 +101,26 @@ html
   }
   .card-title::before {
     content: '';
-    width: 4px; height: 18px;
+    width: 4px; height: 16px;
     background: #2d5a87;
     border-radius: 2px;
   }
 
   .form-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
   }
   .field label {
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     color: #6b7280;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     font-weight: 700;
   }
   .field input, .field select {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 2px solid #e5e7eb;
     border-radius: 8px;
     font-family: inherit;
@@ -128,26 +128,34 @@ html
     background: #fafbfc;
     font-weight: 600;
     color: #1e3a5f;
+    transition: all 0.2s;
   }
-  .field input:focus { outline: none; border-color: #2d5a87; background: white; }
+  .field input:focus { 
+    outline: none; 
+    border-color: #2d5a87; 
+    background: white; 
+    transform: scale(1.05); /* زوم ملایم */
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(45,90,135,0.15);
+  }
 
   .sample-counter {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 12px 14px;
+    gap: 10px;
+    padding: 10px 12px;
     background: #f3f4f6;
     border-radius: 10px;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     font-weight: 700;
     color: #1e3a5f;
-    font-size: 15px;
+    font-size: 13px;
     flex-wrap: wrap;
   }
   .sample-counter button {
-    width: 44px; height: 44px;
+    width: 36px; height: 36px;
     border-radius: 50%;
-    font-size: 24px;
+    font-size: 20px;
     padding: 0;
     display: flex;
     align-items: center;
@@ -156,41 +164,41 @@ html
     color: white;
   }
   .sample-counter button:disabled { background: #cbd5e1; cursor: not-allowed; }
-  .sample-counter .count { font-size: 22px; min-width: 40px; text-align: center; }
+  .sample-counter .count { font-size: 18px; min-width: 30px; text-align: center; }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    font-size: 13px;
     margin-top: 10px;
-    min-width: 750px; /* اسکرول افقی در موبایل */
+    min-width: 700px; /* اسکرول افقی در موبایل */
   }
   th, td {
     border: 1px solid #d1d5db;
-    padding: 10px 6px;
+    padding: 8px 4px;
     text-align: center;
   }
   th {
     background: #f3f4f6;
     font-weight: 700;
     color: #374151;
-    font-size: 12px;
+    font-size: 11px;
   }
   td.row-label {
     background: #f9fafb;
     font-weight: 700;
     text-align: right;
     padding-right: 8px;
-    font-size: 12px;
+    font-size: 11px;
     white-space: nowrap;
   }
   td.sample-label {
     background: #2d5a87;
     color: white;
     font-weight: 700;
-    width: 50px;
+    width: 45px;
     vertical-align: middle;
-    font-size: 16px;
+    font-size: 14px;
   }
   td.standard { background: #eff6ff; color: #1e40af; font-weight: 700; }
   td.before { background: #fef3c7; }
@@ -198,29 +206,37 @@ html
   td.shrink { background: #fee2e2; color: #991b1b; font-weight: 700; }
   td.calc-result { background: #e0e7ff; color: #1e3a5f; font-weight: 700; }
   
+  /* کادرهای ورودی جدول با انیمیشن زوم */
   table input {
     width: 100%;
-    border: 2px solid #e5e7eb;
-    background: white;
+    border: 2px solid transparent; /* شفاف در حالت عادی برای ظاهر تمیز */
+    background: transparent;
     text-align: center;
     font-family: inherit;
-    font-size: 16px;
-    padding: 8px 4px;
+    font-size: 15px;
+    padding: 6px 2px;
     font-weight: 700;
     color: #1e3a5f;
     border-radius: 6px;
-    min-width: 70px; /* کادر بزرگ‌تر */
+    min-width: 60px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
+  
+  /* حالت فوکوس: زوم کردن و پررنگ کردن کادر */
   table input:focus {
     outline: none;
     border-color: #2d5a87;
-    box-shadow: 0 0 0 3px rgba(45,90,135,0.2);
+    background: white;
+    transform: scale(1.15); /* بزرگ‌نمایی ملایم */
+    z-index: 20;
+    box-shadow: 0 4px 15px rgba(45,90,135,0.25);
+    position: relative;
   }
 
   .phys-section { margin-top: 16px; padding-top: 16px; border-top: 1.5px dashed #cbd5e1; }
   .phys-section:first-child { border-top: none; padding-top: 0; margin-top: 0; }
   .phys-title {
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 700;
     color: #2d5a87;
     margin-bottom: 8px;
@@ -233,18 +249,18 @@ html
   .signature-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
+    gap: 16px;
     margin-top: 16px;
   }
   .signature-box {
     border: 2px dashed #cbd5e1;
     border-radius: 10px;
-    padding: 14px;
+    padding: 12px;
     text-align: center;
   }
   .signature-box label {
     display: block;
-    font-size: 12px;
+    font-size: 11px;
     color: #6b7280;
     margin-bottom: 6px;
     font-weight: 700;
@@ -256,22 +272,36 @@ html
     padding: 8px;
     text-align: center;
     font-family: inherit;
-    font-size: 16px;
+    font-size: 15px;
     background: transparent;
     font-weight: 600;
+    transition: all 0.2s;
   }
+  .signature-box input:focus { 
+    outline: none; 
+    transform: scale(1.05); 
+    z-index: 10;
+  }
+  
   textarea {
     width: 100%;
-    padding: 12px;
+    padding: 10px;
     border: 2px solid #e5e7eb;
     border-radius: 8px;
     font-family: inherit;
     font-size: 15px;
-    min-height: 80px;
+    min-height: 70px;
     resize: vertical;
     background: #fafbfc;
+    transition: all 0.2s;
   }
-  textarea:focus { outline: none; border-color: #2d5a87; background: white; }
+  textarea:focus { 
+    outline: none; 
+    border-color: #2d5a87; 
+    background: white; 
+    transform: scale(1.02); 
+    z-index: 10;
+  }
 
   @media print {
     body { background: white; padding: 0; font-size: 8px; }
@@ -286,13 +316,13 @@ html
     .card-title { font-size: 9px; margin-bottom: 4px; padding-bottom: 2px; border-bottom-width: 1px; }
     .form-grid { gap: 3px; }
     .field label { font-size: 7px; margin-bottom: 1px; }
-    .field input { padding: 2px 4px; font-size: 8px; border: 1px solid #999; border-radius: 0; }
+    .field input { padding: 2px 4px; font-size: 8px; border: 1px solid #999; border-radius: 0; transform: none !important; }
     th, td { border: 1px solid #999 !important; font-size: 7px; padding: 1px 2px; }
     th { background: #e5e7eb !important; font-size: 7px; }
     td.sample-label { background: #2d5a87 !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     td.standard, td.before, td.after, td.shrink, td.calc-result { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     td.row-label { font-size: 7px; }
-    input, textarea { border: none !important; background: transparent !important; padding: 0 !important; font-size: 8px !important; }
+    input, textarea { border: none !important; background: transparent !important; padding: 0 !important; font-size: 8px !important; transform: none !important; }
     textarea { min-height: 20px; }
     .signature-section { gap: 8px; margin-top: 6px; }
     .signature-box { padding: 4px; }
@@ -438,7 +468,7 @@ function renderSamples() {
   collectValues();
   const container = document.getElementById('samplesContainer');
   let html = '<table><thead><tr>' +
-    '<th style="width:60px;">نمونه</th><th style="width:80px;">وضعیت</th>' +
+    '<th style="width:50px;">نمونه</th><th style="width:70px;">وضعیت</th>' +
     '<th>طول</th><th>عرض</th><th>ارتفاع جلو</th><th>ارتفاع عقب</th><th>وزن (g)</th><th>دانسیته</th>' +
     '</tr></thead><tbody>';
 
@@ -633,3 +663,24 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
+🛠️ قدم ۲: کد جدید sw.js
+برو به فایل sw.js، کل کد قبلی را پاک کن و این را جایگزین کن (نسخه v8):
+
+javascript
+const CACHE_NAME = 'refractory-v8';
+
+self.addEventListener('install', (e) => {
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (e) => {
+  e.waitUntil(self.clients.claim());
+});
+
+self.addEventListener('fetch', (e) => {
+  e.respondWith(
+    caches.match(e.request).then((response) => {
+      return response || fetch(e.request);
+    })
+  );
+});
