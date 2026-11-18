@@ -170,7 +170,7 @@ html
     border-collapse: collapse;
     font-size: 11px;
     margin-top: 6px;
-    table-layout: fixed; /* برای جا شدن کامل در صفحه */
+    table-layout: fixed; 
   }
   th, td {
     border: 1px solid #d1d5db;
@@ -218,16 +218,17 @@ html
     font-weight: 700;
     color: #1e3a5f;
     border-radius: 3px;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
+  /* زوم بزرگ‌تر و واضح‌تر */
   table input:focus {
     outline: none;
     border-color: #2d5a87;
     background: white;
-    transform: scale(1.3); /* زوم واضح‌تر */
-    z-index: 20;
-    box-shadow: 0 4px 15px rgba(45,90,135,0.3);
+    transform: scale(1.6); /* بزرگنمایی بیشتر */
+    z-index: 100;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* سایه قوی‌تر */
     position: relative;
   }
 
