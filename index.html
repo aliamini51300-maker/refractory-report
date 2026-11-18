@@ -164,7 +164,6 @@ html
   .sample-counter button:disabled { background: #cbd5e1; cursor: not-allowed; }
   .sample-counter .count { font-size: 14px; min-width: 20px; text-align: center; }
 
-  /* جدول‌ها: ۱۰۰٪ عرض صفحه، بدون اسکرول */
   table {
     width: 100%;
     border-collapse: collapse;
@@ -206,7 +205,6 @@ html
   td.shrink { background: #fee2e2; color: #991b1b; font-weight: 700; }
   td.calc-result { background: #e0e7ff; color: #1e3a5f; font-weight: 700; }
   
-  /* کادرهای ورودی جدول با انیمیشن زوم */
   table input {
     width: 100%;
     border: 1px solid transparent;
@@ -221,19 +219,17 @@ html
     transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
-  /* زوم بزرگ‌تر و واضح‌تر */
   table input:focus {
     outline: none;
     border-color: #2d5a87;
     background: white;
-    transform: scale(1.6); /* بزرگنمایی بیشتر */
+    transform: scale(1.6);
     z-index: 100;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3); /* سایه قوی‌تر */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
     position: relative;
   }
 
   .phys-section { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #cbd5e1; }
-  .phys-section:first-child { border-top: none; padding-top: 0; margin-top: 0; }
   .phys-title {
     font-size: 10px;
     font-weight: 700;
@@ -404,8 +400,25 @@ html
 
   <div id="tab-phys" class="tab-content">
     <div class="card">
-      <div class="card-title">خواص فیزیکی</div>
+      <div class="card-title">اطلاعات آزمایش</div>
+      <div class="form-grid">
+        <div class="field"><label>تاریخ</label><input type="text" id="physDate"></div>
+        <div class="field"><label>شیفت</label><input type="text" id="physShift"></div>
+        <div class="field"><label>شماره پخت</label><input type="text" id="physBatch"></div>
+        <div class="field"><label>دمای پخت</label><input type="number" id="physTemp"></div>
+        <div class="field"><label>کیفیت آجر</label><input type="text" id="physQuality"></div>
+        <div class="field"><label>وزن مخصوص نفت (S)</label><input type="number" id="physS" value="0.8" step="0.01"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">نتایج خواص فیزیکی</div>
       <div id="physContainer"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">مقاومت فشاری آجر در حالت سرد (CCS)</div>
+      <div id="ccsContainer"></div>
     </div>
   </div>
 
@@ -413,8 +426,8 @@ html
     <div class="card">
       <div class="card-title">توضیحات و امضاها</div>
       <div class="field" style="margin-bottom:10px">
-        <label>توضیحات</label>
-        <textarea id="notes" placeholder="آجر تولید شده با ضایعات دریچه کشویی پخت شده در کوره دوار ..."></textarea>
+        <label>ملاحظات</label>
+        <textarea id="notes"></textarea>
       </div>
       <div class="signature-section">
         <div class="signature-box">
@@ -430,235 +443,3 @@ html
   </div>
 
 </div>
-
-<script>
-const MAX_SAMPLES = 10;
-let sampleCount = 2;
-let savedValues = {};
-
-function switchTab(tabId) {
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-  document.getElementById('tab-' + tabId).classList.add('active');
-  event.target.classList.add('active');
-}
-
-function num(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
-function fmt(n, d=2) { if (n === null || n === undefined || isNaN(n)) return '—'; return n.toFixed(d); }
-
-function density(weight, len, wid, hf, hb) {
-  if (!weight || !len || !wid || !hf || !hb) return null;
-  const avgH = (hf + hb) / 2;
-  return (weight / (avgH * wid * len)) * 1000;
-}
-
-function collectValues() {
-  document.querySelectorAll('input, textarea').forEach(el => {
-    if (el.id) savedValues[el.id] = el.value;
-  });
-}
-function restoreValues() {
-  document.querySelectorAll('input, textarea').forEach(el => {
-    if (el.id && savedValues[el.id] !== undefined) el.value = savedValues[el.id];
-  });
-}
-
-function renderSamples() {
-  collectValues();
-  const container = document.getElementById('samplesContainer');
-  let html = '<table><thead><tr>' +
-    '<th style="width:35px;">نمونه</th><th style="width:50px;">وضعیت</th>' +
-    '<th>طول</th><th>عرض</th><th>ارتفاع جلو</th><th>ارتفاع عقب</th><th>وزن (g)</th><th>دانسیته</th>' +
-    '</tr></thead><tbody>';
-
-  for (let i = 1; i <= sampleCount; i++) {
-    html += `
-      <tr>
-        <td class="sample-label" rowspan="4">${i}</td>
-        <td class="row-label">قبل پخت</td>
-        <td class="before"><input type="number" id="s${i}_befLen" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="before"><input type="number" id="s${i}_befWid" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="before"><input type="number" id="s${i}_befHF" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="before"><input type="number" id="s${i}_befHB" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="before"><input type="number" id="s${i}_befW" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="calc-result" id="s${i}_befDens">—</td>
-      </tr>
-      <tr>
-        <td class="row-label">بعد پخت</td>
-        <td class="after"><input type="number" id="s${i}_aftLen" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="after"><input type="number" id="s${i}_aftWid" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="after"><input type="number" id="s${i}_aftHF" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="after"><input type="number" id="s${i}_aftHB" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="after"><input type="number" id="s${i}_aftW" step="0.1" oninput="calcSample(${i})"></td>
-        <td class="calc-result" id="s${i}_aftDens">—</td>
-      </tr>
-      <tr>
-        <td class="row-label">شرینکیج %</td>
-        <td class="shrink" id="s${i}_shrLen">—</td>
-        <td class="shrink" id="s${i}_shrWid">—</td>
-        <td class="shrink" id="s${i}_shrHF">—</td>
-        <td class="shrink" id="s${i}_shrHB">—</td>
-        <td class="shrink" id="s${i}_shrW">—</td>
-        <td class="shrink" id="s${i}_shrDens">—</td>
-      </tr>
-      <tr style="height:3px;"><td colspan="8" style="padding:0; border:none; background:#f9fafb;"></td></tr>
-    `;
-  }
-  html += '</tbody></table>';
-  container.innerHTML = html;
-  restoreValues();
-  for (let i = 1; i <= sampleCount; i++) calcSample(i);
-}
-
-function renderPhys() {
-  collectValues();
-  const container = document.getElementById('physContainer');
-  let html = '';
-  for (let i = 1; i <= sampleCount; i++) {
-    html += `
-      <div class="phys-section">
-        <div class="phys-title">نمونه ${i}</div>
-        <table>
-          <thead>
-            <tr><th>W1</th><th>W2</th><th>W3</th><th>AP(%)</th><th>WA(%)</th><th>ASG</th><th>BD</th><th>CCS</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="number" id="p${i}_W1" step="0.1" oninput="calcPhys(${i})"></td>
-              <td><input type="number" id="p${i}_W2" step="0.1" oninput="calcPhys(${i})"></td>
-              <td><input type="number" id="p${i}_W3" step="0.1" oninput="calcPhys(${i})"></td>
-              <td class="calc-result" id="p${i}_AP">—</td>
-              <td class="calc-result" id="p${i}_WA">—</td>
-              <td class="calc-result" id="p${i}_ASG">—</td>
-              <td class="calc-result" id="p${i}_BD">—</td>
-              <td><input type="number" id="p${i}_CCS" step="0.1"></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    `;
-  }
-  container.innerHTML = html;
-  restoreValues();
-  for (let i = 1; i <= sampleCount; i++) calcPhys(i);
-}
-
-function calcSample(i) {
-  const g = id => num(document.getElementById(`s${i}_${id}`)?.value);
-  const befLen=g('befLen'), befWid=g('befWid'), befHF=g('befHF'), befHB=g('befHB'), befW=g('befW');
-  const aftLen=g('aftLen'), aftWid=g('aftWid'), aftHF=g('aftHF'), aftHB=g('aftHB'), aftW=g('aftW');
-  const befDens = density(befW, befLen, befWid, befHF, befHB);
-  const aftDens = density(aftW, aftLen, aftWid, aftHF, aftHB);
-  const set = (id, v) => { const el = document.getElementById(`s${i}_${id}`); if (el) el.textContent = v; };
-  set('befDens', fmt(befDens));
-  set('aftDens', fmt(aftDens));
-  const sh = (a, b) => { if (!a || !b) return '—'; return fmt(((a - b) / a) * 100, 2) + '%'; };
-  set('shrLen', sh(befLen, aftLen));
-  set('shrWid', sh(befWid, aftWid));
-  set('shrHF', sh(befHF, aftHF));
-  set('shrHB', sh(befHB, aftHB));
-  set('shrW', sh(befW, aftW));
-  set('shrDens', sh(befDens, aftDens));
-}
-
-function calcPhys(i) {
-  const g = id => num(document.getElementById(`p${i}_${id}`)?.value);
-  const W1=g('W1'), W2=g('W2'), W3=g('W3');
-  const AP  = (W1 && W2 && W3 && (W3 - W2) !== 0) ? ((W3 - W1) / (W3 - W2)) * 100 : null;
-  const WA  = (W1 && W3) ? ((W3 - W1) / W1) * 125 : null;
-  const ASG = (W1 && W2 && (W1 - W2) !== 0) ? (W1 / (W1 - W2)) * 0.8 : null;
-  const BD  = (W3 && W2 && (W3 - W2) !== 0) ? (W3 / (W3 - W2)) * 0.8 : null;
-  const set = (id, v) => { const el = document.getElementById(`p${i}_${id}`); if (el) el.textContent = v; };
-  set('AP', fmt(AP)); set('WA', fmt(WA)); set('ASG', fmt(ASG, 3)); set('BD', fmt(BD, 3));
-}
-
-function changeSamples(delta) {
-  const newCount = Math.max(1, Math.min(MAX_SAMPLES, sampleCount + delta));
-  if (newCount === sampleCount) return;
-  collectValues();
-  sampleCount = newCount;
-  document.getElementById('sampleCount').textContent = sampleCount;
-  document.getElementById('btnMinus').disabled = sampleCount <= 1;
-  document.getElementById('btnPlus').disabled = sampleCount >= MAX_SAMPLES;
-  renderSamples();
-  renderPhys();
-}
-
-const STORAGE_KEY = 'refractory_v9';
-
-function collectAll() {
-  const data = { sampleCount };
-  document.querySelectorAll('input, textarea').forEach(el => { if (el.id) data[el.id] = el.value; });
-  return data;
-}
-
-function saveData() {
-  try {
-    const data = collectAll();
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    alert('✅ اطلاعات با موفقیت ذخیره شد!');
-  } catch(e) {
-    alert('❌ خطا در ذخیره‌سازی: ' + e.message);
-  }
-}
-
-function loadData() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return;
-    const data = JSON.parse(raw);
-    if (data.sampleCount) sampleCount = data.sampleCount;
-    Object.keys(data).forEach(id => {
-      const el = document.getElementById(id);
-      if (el && id !== 'sampleCount') el.value = data[id];
-    });
-  } catch(e) {}
-}
-
-function resetForm() {
-  if (!confirm('آیا مطمئن هستید؟ همه اطلاعات پاک می‌شوند.')) return;
-  localStorage.removeItem(STORAGE_KEY);
-  savedValues = {};
-  sampleCount = 2;
-  document.getElementById('sampleCount').textContent = sampleCount;
-  document.getElementById('btnMinus').disabled = false;
-  document.getElementById('btnPlus').disabled = false;
-  document.getElementById('stdLen').value = 230;
-  document.getElementById('stdWid').value = 114;
-  document.getElementById('stdHF').value = 76;
-  document.getElementById('stdHB').value = 76;
-  renderSamples();
-  renderPhys();
-  alert('🗑️ همه اطلاعات پاک شد!');
-}
-
-function exportJSON() {
-  const data = collectAll();
-  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'گزارش-پخت-' + (data.batchNo || 'بدون-شماره') + '.json';
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('sw.js').then(() => {
-      console.log('SW registered');
-    }).catch(err => console.log('SW failed:', err));
-  });
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  loadData();
-  document.getElementById('sampleCount').textContent = sampleCount;
-  document.getElementById('btnMinus').disabled = sampleCount <= 1;
-  document.getElementById('btnPlus').disabled = sampleCount >= MAX_SAMPLES;
-  renderSamples();
-  renderPhys();
-});
-</script>
-</body>
-</html>
