@@ -8,7 +8,6 @@ html
 <title>گزارش پخت آجر نسوز</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/png" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -20,6 +19,7 @@ html
     padding-top: max(10px, env(safe-area-inset-top));
   }
   .container { max-width: 700px; margin: 0 auto; }
+  
   header {
     background: linear-gradient(135deg, #1e3a5f, #2d5a87);
     color: white;
@@ -36,6 +36,7 @@ html
   header h1 { font-size: 15px; margin-bottom: 2px; }
   header .company { font-size: 10px; opacity: 0.85; }
   .toolbar { display: flex; gap: 6px; flex-wrap: wrap; }
+  
   button {
     font-family: inherit;
     padding: 8px 12px;
@@ -50,6 +51,7 @@ html
   .btn-print { background: #f59e0b; color: white; }
   .btn-danger { background: #ef4444; color: white; }
   .btn-success { background: #10b981; color: white; }
+  
   .tabs {
     display: flex;
     gap: 4px;
@@ -76,6 +78,7 @@ html
   }
   .tab-content { display: none; }
   .tab-content.active { display: block; }
+
   .card {
     background: white;
     border-radius: 10px;
@@ -100,6 +103,7 @@ html
     background: #2d5a87;
     border-radius: 2px;
   }
+
   .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -129,6 +133,7 @@ html
     transform: scale(1.02); z-index: 10;
     box-shadow: 0 2px 8px rgba(45,90,135,0.15);
   }
+
   .sample-card, .phys-card, .ccs-card {
     border: 1.5px solid #e5e7eb;
     border-radius: 10px;
@@ -156,6 +161,7 @@ html
   .result-box .value { font-size: 15px; font-weight: 800; color: #1e3a5f; }
   .result-box.shrink { background: #fee2e2; }
   .result-box.shrink .value { color: #991b1b; }
+
   .sample-counter {
     display: flex; align-items: center; gap: 10px;
     padding: 8px 12px; background: #f3f4f6; border-radius: 8px;
@@ -169,6 +175,7 @@ html
   }
   .sample-counter button:disabled { background: #cbd5e1; cursor: not-allowed; }
   .sample-counter .count { font-size: 18px; min-width: 30px; text-align: center; }
+
   .phys-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-bottom: 6px; }
   .phys-row .field label { font-size: 9px; }
   .phys-row .field input { padding: 6px; font-size: 14px; }
@@ -181,6 +188,7 @@ html
   .ccs-result { display: grid; grid-template-columns: 1fr; gap: 6px; margin-top: 8px; }
   .ccs-result .result-box { background: #fef3c7; }
   .ccs-result .result-box .value { color: #92400e; }
+
   .signature-section { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
   .signature-box { border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 10px; text-align: center; }
   .signature-box label { display: block; font-size: 10px; color: #6b7280; margin-bottom: 4px; font-weight: 700; }
@@ -188,31 +196,63 @@ html
   .signature-box input:focus { outline: none; transform: scale(1.05); z-index: 10; }
   textarea { width: 100%; padding: 8px; border: 1.5px solid #e5e7eb; border-radius: 6px; font-family: inherit; font-size: 14px; min-height: 60px; resize: vertical; background: #fafbfc; transition: all 0.2s; }
   textarea:focus { outline: none; border-color: #2d5a87; background: white; transform: scale(1.02); z-index: 10; }
+
+  /* ===== PRINT LAYOUT (فرم چاپی شبیه اکسل) ===== */
   @media print {
-    body { background: white; padding: 0; font-size: 7px; }
+    body { background: white; padding: 0; font-size: 9px; }
     .no-print { display: none !important; }
     .container { max-width: 100%; }
-    header { background: #1e3a5f !important; padding: 4px 8px; margin-bottom: 4px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    header h1 { font-size: 10px; }
-    .tab-content { display: block !important; page-break-after: always; }
-    .tab-content:last-child { page-break-after: avoid; }
-    .card { box-shadow: none; border: 1px solid #999; margin-bottom: 4px; padding: 4px; border-radius: 0; }
-    .card-title { font-size: 7px; margin-bottom: 2px; padding-bottom: 1px; }
-    .form-grid { gap: 2px; }
-    .field label { font-size: 5px; margin-bottom: 1px; }
-    .field input { padding: 1px 2px; font-size: 6px; border: 1px solid #999; border-radius: 0; transform: none !important; }
-    .sample-card, .phys-card, .ccs-card { border: 1px solid #999; padding: 4px; margin-bottom: 4px; }
-    .sample-card .badge, .phys-card .badge, .ccs-card .badge { background: #2d5a87 !important; color: white !important; font-size: 6px; }
-    .sample-card h4, .phys-card h4, .ccs-card h4 { font-size: 6px; margin-bottom: 2px; }
-    .row-group, .phys-row, .ccs-row { gap: 2px; }
-    .result-group, .phys-result, .ccs-result { gap: 2px; margin-top: 2px; padding-top: 2px; }
-    .result-box { padding: 2px; border-radius: 0; background: #eee !important; }
-    .result-box .label { font-size: 5px; }
-    .result-box .value { font-size: 6px; }
-    .signature-section { gap: 4px; margin-top: 4px; }
-    .tabs { display: none !important; }
-    @page { size: A4 landscape; margin: 4mm; }
+    header { background: #1e3a5f !important; padding: 6px 12px; margin-bottom: 6px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    header h1 { font-size: 12px; }
+    .tab-content { display: block !important; }
+    
+    /* مخفی کردن دکمه‌ها و فرم‌های ورودی در چاپ */
+    .tab-btn, .sample-counter, .badge, .no-print, button { display: none !important; }
+    
+    /* کارت‌ها در چاپ به هم بچسبند */
+    .card { box-shadow: none; border: 1px solid #333; margin-bottom: 4px; padding: 4px; border-radius: 0; }
+    .card-title { font-size: 9px; margin-bottom: 4px; padding-bottom: 2px; border-bottom: 1px solid #333; }
+    
+    /* تبدیل کارت‌ها به جدول در چاپ */
+    .sample-card, .phys-card, .ccs-card {
+      border: 1px solid #333;
+      border-radius: 0;
+      padding: 4px;
+      margin-bottom: 4px;
+      background: white;
+    }
+    .sample-card h4, .phys-card h4, .ccs-card h4 { display: none; }
+    
+    .row-group, .phys-row, .ccs-row { display: inline-block; width: 100%; margin-bottom: 2px; }
+    .row-group .field, .phys-row .field, .ccs-row .field { display: inline-block; width: 24%; margin-left: 1%; }
+    .row-group .field label, .phys-row .field label, .ccs-row .field label { display: inline; font-size: 7px; margin-left: 2px; }
+    .row-group .field input, .phys-row .field input, .ccs-row .field input { 
+      display: inline; width: 50%; border: none !important; border-bottom: 1px solid #666 !important; 
+      background: transparent !important; font-size: 8px !important; padding: 0 !important; 
+      transform: none !important; box-shadow: none !important; text-align: center;
+    }
+    
+    .result-group, .phys-result, .ccs-result { display: inline-block; width: 100%; margin-top: 2px; padding-top: 2px; border-top: 1px dashed #999; }
+    .result-box { display: inline-block; width: 24%; background: transparent !important; padding: 0; text-align: center; }
+    .result-box .label { font-size: 6px; display: inline; }
+    .result-box .value { font-size: 7px; display: inline; font-weight: bold; }
+    .result-box.shrink { background: transparent !important; }
+    
+    .form-grid { display: block; }
+    .form-grid .field { display: inline-block; width: 30%; margin-left: 2%; }
+    .form-grid .field label { display: inline; font-size: 7px; }
+    .form-grid .field input { display: inline; width: 60%; border: none !important; border-bottom: 1px solid #666 !important; background: transparent !important; font-size: 8px !important; transform: none !important; }
+
+    .signature-section { display: flex; justify-content: space-between; margin-top: 10px; }
+    .signature-box { width: 45%; border: none; padding: 0; }
+    .signature-box label { font-size: 7px; }
+    .signature-box input { font-size: 8px; border-bottom: 1px solid #333; }
+    
+    textarea { border: none !important; background: transparent !important; font-size: 8px !important; min-height: 15px; transform: none !important; }
+    
+    @page { size: A4 landscape; margin: 5mm; }
   }
+  @page { size: A4 landscape; margin: 5mm; }
 </style>
 </head>
 <body>
@@ -229,6 +269,7 @@ html
       <button class="btn-danger" onclick="resetForm()">🗑️ پاک کردن</button>
     </div>
   </header>
+
   <div class="tabs no-print">
     <button class="tab-btn active" onclick="switchTab('dash')">📊 ابعاد</button>
     <button class="tab-btn" onclick="switchTab('phys')">🧪 خواص فیزیکی</button>
@@ -300,9 +341,8 @@ html
       </div>
     </div>
   </div>
-
 </div>
-html
+javascript
 <script>
 const MAX_SAMPLES = 10;
 let sampleCount = 2;
@@ -339,7 +379,6 @@ function renderSamples() {
   collectValues();
   const container = document.getElementById('samplesContainer');
   let html = '';
-
   for (let i = 1; i <= sampleCount; i++) {
     html += `
       <div class="sample-card">
@@ -394,11 +433,9 @@ function renderPhys() {
   collectValues();
   const container = document.getElementById('physContainer');
   let html = '';
-
   for (let i = 1; i <= sampleCount; i++) {
     const isTop = (i % 2 === 1);
     const rowLabel = isTop ? 'سر' : 'ته';
-
     html += `
       <div class="phys-card">
         <div class="badge">نمونه ${i} (${rowLabel})</div>
@@ -431,11 +468,9 @@ function renderCCS() {
   collectValues();
   const container = document.getElementById('ccsContainer');
   let html = '';
-
   for (let i = 1; i <= sampleCount; i++) {
     const isTop = (i % 2 === 1);
     const rowLabel = isTop ? 'سر' : 'ته';
-
     html += `
       <div class="ccs-card">
         <div class="badge">نمونه ${i} (${rowLabel})</div>
@@ -517,7 +552,7 @@ function changeSamples(delta) {
   renderCCS();
 }
 
-const STORAGE_KEY = 'refractory_v14';
+const STORAGE_KEY = 'refractory_v15';
 
 function collectAll() {
   const data = { sampleCount };
